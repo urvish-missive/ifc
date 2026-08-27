@@ -11,15 +11,7 @@ const NAV_LINKS = [
 ]
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -29,11 +21,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
-        scrolled
-          ? 'border-white/[0.08] bg-[#0a2a27]/95 backdrop-blur-lg'
-          : 'border-white/[0.05] bg-transparent'
-      }`}
+      className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.08] bg-[#09272A]"
     >
       <nav className="mx-auto flex h-[72px] w-full max-w-[1280px] items-center px-6 sm:px-10">
         {/* Brand */}
@@ -53,7 +41,7 @@ export default function Header() {
             <li key={item.label}>
               <a
                 href={item.href}
-                className="relative py-2 text-[14.5px] font-medium text-[#C6D3CB] transition-colors hover:text-cream"
+                className="relative py-2 text-[14.5px] font-medium text-[#C6D3CB] transition-colors hover:text-cream after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:w-0 after:bg-marigold after:transition-all after:duration-300 hover:after:w-full"
               >
                 {item.label}
               </a>

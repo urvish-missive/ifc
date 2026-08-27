@@ -129,7 +129,7 @@ export default function Home() {
 
     // Scroll-driven stage advancement for the case desk section
     const deskTrack = document.getElementById('deskTrack')
-    const STAGE_THRESHOLDS = [0, 0.08, 0.31, 0.54, 0.77]
+    const STAGE_THRESHOLDS = [0, 0.06, 0.24, 0.46, 0.70]
 
     function onDeskScroll() {
       if (!deskTrack) return
@@ -326,10 +326,10 @@ export default function Home() {
               </div>
 
               <div className="legend">
-                <b className="cursor-pointer" onClick={() => setActiveSeg('paid')}><i style={{ background: '#8FCBA6' }} />Paid</b>
-                <b className="cursor-pointer" onClick={() => setActiveSeg('dis')}><i style={{ background: '#EBBE72' }} />Disallowed</b>
-                <b className="cursor-pointer" onClick={() => setActiveSeg('rep')}><i style={{ background: '#DC8C74' }} />Repudiated</b>
-                <b className="cursor-pointer" onClick={() => setActiveSeg('out')}><i style={{ background: '#BFCBBE' }} />Outstanding</b>
+                <b className="cursor-pointer" onClick={() => setActiveSeg('paid')}><i className="bg-[#8FCBA6]" />Paid</b>
+                <b className="cursor-pointer" onClick={() => setActiveSeg('dis')}><i className="bg-[#EBBE72]" />Disallowed</b>
+                <b className="cursor-pointer" onClick={() => setActiveSeg('rep')}><i className="bg-[#DC8C74]" />Repudiated</b>
+                <b className="cursor-pointer" onClick={() => setActiveSeg('out')}><i className="bg-[#BFCBBE]" />Outstanding</b>
               </div>
 
               {/* Dynamic Interactive Readout */}
@@ -344,7 +344,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <p className="src" style={{ marginTop: '16px' }}>
+              <p className="src mt-4">
                 IRDAI Annual Report 2023-24. Percentages are of claim amount, not claim count, and total 100.01% due to rounding in the source.
               </p>
             </div>
@@ -374,7 +374,7 @@ export default function Home() {
                 </div>
                 <p>of general insurance grievances in FY 2024-25 were about claims: delays, underpayment or rejection.</p>
               </div>
-              <p className="src" style={{ marginTop: '20px' }}>
+              <p className="src mt-5">
                 IRDAI Master Circular on Health Insurance Business, 29 May 2024. IRDAI Annual Report 2024-25.
               </p>
             </div>
@@ -394,7 +394,7 @@ export default function Home() {
               <p className="lede">
                 Aggregators end at checkout. Administrators begin at adjudication. The part in between, where insurance is actually experienced, belongs to nobody. 1FC Insure turns every moment of need into a case with an owner, a checklist, a status and a clock.
               </p>
-              <div className="boundary" style={{ marginTop: '26px' }}>
+              <div className="boundary mt-6">
                 1FC assists, coordinates and follows up. Coverage decisions, adjudication, approvals and settlement stay with the insurer and TPA under your policy terms. We do not blur that line, we make it navigable.
               </div>
             </div>
@@ -690,7 +690,7 @@ export default function Home() {
           <div className="head rv">
             <span className="label">The 1FC group</span>
             <h2>Part of 1FC.</h2>
-            <p className="lede" style={{ marginTop: '18px' }}>
+            <p className="lede mt-4">
               1FC Insure is not a standalone insurance site. It sits inside a wider financial platform and shares its design language, engineering standards and service philosophy with the rest of the group.
             </p>
           </div>
@@ -764,11 +764,11 @@ export default function Home() {
         <div className="wrap final-in">
           <div className="rv">
             <span className="label">Early access</span>
-            <h2 style={{ marginTop: '22px' }}>Join the first release.</h2>
-            <p className="lede" style={{ marginTop: '22px', maxWidth: '42ch' }}>
+            <h2 className="mt-5">Join the first release.</h2>
+            <p className="lede mt-5 max-w-[42ch]">
               The first group we onboard gets a customer record, a named coordinator and the case desk from day one.
             </p>
-            <div className="hero-meta" style={{ borderTopColor: 'var(--line-d2)', maxWidth: '420px' }}>
+            <div className="hero-meta border-t-[color:var(--line-d2)] max-w-[420px]">
               <span>No payment</span>
               <span>No policy required</span>
               <span>Leave any time</span>
