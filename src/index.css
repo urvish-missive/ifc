@@ -1871,7 +1871,7 @@ p { max-width: 60ch; }
 .light .boundary { color: #3e5349; }
 
 /* --- Desk Section --- */
-.desk { background: var(--forest-850); }
+.desk { background: var(--forest-850); overflow: hidden; }
 .desk-track {
   position: relative;
   height: calc((100vh - var(--navh)) + 120vh);
@@ -2411,6 +2411,13 @@ p { max-width: 60ch; }
   color: var(--cream);
   font-family: 'Archivo', sans-serif;
   font-size: 15px;
+}
+@media (max-width: 640px) {
+  .fld select {
+    font-size: 13px;
+    padding: 10px 12px;
+    appearance: auto;
+  }
 }
 .fld input::placeholder {
   color: #6e8781;

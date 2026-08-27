@@ -23,7 +23,7 @@ export default function Header() {
     <header
       className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.08] bg-[#09272A]"
     >
-      <nav className="mx-auto flex h-[72px] w-full max-w-[1280px] items-center px-6 sm:px-10">
+      <nav className="mx-auto flex h-[72px] w-full max-w-[1280px] items-center px-[var(--pad)]">
         {/* Brand */}
         <Link
           to="/"
@@ -78,7 +78,7 @@ export default function Header() {
             transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
             className="mx-auto max-w-[1280px] border-t border-white/[0.06] bg-[#0a2a27]/98 backdrop-blur-xl lg:hidden"
           >
-            <div className="px-6 py-5">
+            <div className="px-[var(--pad)] py-5">
               <ul className="flex flex-col gap-1">
                 {NAV_LINKS.map((item) => (
                   <li key={item.label}>
