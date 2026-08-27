@@ -1871,7 +1871,8 @@ p { max-width: 60ch; }
 .light .boundary { color: #3e5349; }
 
 /* --- Desk Section --- */
-.desk { background: var(--forest-850); overflow: hidden; }
+.desk { background: var(--forest-850); }
+.desk-scene-wrap { overflow: hidden; }
 .desk-track {
   position: relative;
   height: calc((100vh - var(--navh)) + 120vh);
