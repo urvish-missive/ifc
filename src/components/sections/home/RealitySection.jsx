@@ -1,5 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react'
 
+const STAT_SIGNALS = [
+  { key: 'claims', unit: 'crore', label: 'health insurance claims were filed with Indian insurers in FY 2023-24.' },
+  { key: 'settled', unit: '%', label: 'of them were settled. Around 11% were repudiated and about 6% were still pending at the year end.' },
+  { key: 'avg', unit: '', label: 'was the average amount paid per claim. Roughly two thirds were settled cashless, the rest reimbursed after the family paid first.' },
+]
+
+const BAR_SEGMENTS = [
+  { key: 'paid', w: 71.29, col: '#8fcba6', label: '\u20B971.29 paid' },
+  { key: 'dis', w: 12.90, col: '#ebbe72', label: '12.90' },
+  { key: 'rep', w: 9.34, col: '#dc8c74', label: '9.34' },
+  { key: 'out', w: 6.48, col: '#bfcbbe', label: '6.48' },
+]
+
+const LEGEND_ITEMS = [
+  { key: 'paid', col: '#8fcba6', label: 'Paid' },
+  { key: 'dis', col: '#ebbe72', label: 'Disallowed' },
+  { key: 'rep', col: '#dc8c74', label: 'Repudiated' },
+  { key: 'out', col: '#bfcbbe', label: 'Outstanding' },
+]
+
+const REGULATORY_CLOCKS = [
+  { n: '1', unit: 'hour', body: 'to grant cashless pre-authorisation once the hospital sends a complete request.' },
+  { n: '3', unit: 'hours', body: 'to issue final authorisation at discharge, with the insurer bearing any extra hospital charge beyond that.' },
+  { n: '69', unit: 'per cent', body: 'of general insurance grievances in FY 2024-25 were about claims: delays, underpayment or rejection.' },
+]
+
 const RUPEE_DATA = {
   paid: {
     k: 'Paid',
@@ -99,18 +125,19 @@ export default function RealitySection() {
 
         {/* Stat signals */}
         <div className="mt-[clamp(40px,5vw,64px)] grid grid-cols-1 sm:grid-cols-3 gap-0 sm:gap-[clamp(14px,2vw,22px)]">
-          {[
-            { val: counts.claims || '3.26', unit: 'crore', label: 'health insurance claims were filed with Indian insurers in FY 2023-24.' },
-            { val: counts.settled || '82.46', unit: '%', label: 'of them were settled. Around 11% were repudiated and about 6% were still pending at the year end.' },
-            { val: `\u20B9${counts.avg ? counts.avg.toLocaleString('en-IN') : '31,086'}`, unit: '', label: 'was the average amount paid per claim. Roughly two thirds were settled cashless, the rest reimbursed after the family paid first.' },
-          ].map(({ val, unit, label }) => (
-            <div key={label} className="border-t border-[#B4C0AC] py-[clamp(22px,2.4vw,30px)] pr-[clamp(24px,2.4vw,32px)] sm:pr-0 rv">
-              <div className="font-display text-[clamp(34px,3.8vw,48px)] font-bold leading-none tracking-[-.042em] text-[#0C3436]">
-                {val}<em className="not-italic text-[.52em] tracking-[-.01em] text-[#7A8C80] ml-1">{unit}</em>
+          {STAT_SIGNALS.map(({ key, unit, label }) => {
+            const val = key === 'claims' ? (counts.claims || '3.26')
+              : key === 'settled' ? (counts.settled || '82.46')
+              : `\u20B9${counts.avg ? counts.avg.toLocaleString('en-IN') : '31,086'}`
+            return (
+              <div key={label} className="border-t border-[#B4C0AC] py-[clamp(22px,2.4vw,30px)] pr-[clamp(24px,2.4vw,32px)] sm:pr-0 rv">
+                <div className="font-display text-[clamp(34px,3.8vw,48px)] font-bold leading-none tracking-[-.042em] text-[#0C3436]">
+                  {val}<em className="not-italic text-[.52em] tracking-[-.01em] text-[#7A8C80] ml-1">{unit}</em>
+                </div>
+                <p className="mt-3.5 text-[14.6px] text-[#43584E] leading-[1.55] max-w-[34ch]">{label}</p>
               </div>
-              <p className="mt-3.5 text-[14.6px] text-[#43584E] leading-[1.55] max-w-[34ch]">{label}</p>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         {/* Reality grid: rupee bar + clocks */}
@@ -123,12 +150,7 @@ export default function RealitySection() {
               aria-label="Health insurance claim amounts, FY 2023-24"
               className="flex h-[76px] rounded-[8px] overflow-hidden border border-[#B4C0AC] bg-[#dde3d6] mt-8"
             >
-              {[
-                { key: 'paid', w: 71.29, col: '#8fcba6', label: '\u20B971.29 paid' },
-                { key: 'dis', w: 12.90, col: '#ebbe72', label: '12.90' },
-                { key: 'rep', w: 9.34, col: '#dc8c74', label: '9.34' },
-                { key: 'out', w: 6.48, col: '#bfcbbe', label: '6.48' },
-              ].map(({ key, w, col, label }) => (
+              {BAR_SEGMENTS.map(({ key, w, col, label }) => (
                 <button
                   key={key}
                   type="button"
@@ -146,12 +168,7 @@ export default function RealitySection() {
 
             {/* Legend */}
             <div className="flex flex-wrap gap-4 mt-4">
-              {[
-                { key: 'paid', col: '#8fcba6', label: 'Paid' },
-                { key: 'dis', col: '#ebbe72', label: 'Disallowed' },
-                { key: 'rep', col: '#dc8c74', label: 'Repudiated' },
-                { key: 'out', col: '#bfcbbe', label: 'Outstanding' },
-              ].map(({ key, col, label }) => (
+              {LEGEND_ITEMS.map(({ key, col, label }) => (
                 <button key={key} type="button" onClick={() => setActiveSeg(key)} className="flex items-center gap-2 cursor-pointer font-mono text-[11px] tracking-[.08em] uppercase text-[#5b7268] font-medium transition-colors hover:text-[#0C3436]">
                   <span className="w-[10px] h-[10px] rounded-[2px] block" style={{ backgroundColor: col }} />
                   {label}
@@ -187,11 +204,7 @@ export default function RealitySection() {
             <p className="text-[15px] text-[#43584E]">
               The IRDAI Master Circular on Health Insurance Business, dated 29 May 2024, replaced 55 earlier circulars and put hard deadlines on the parts of a claim that used to drift.
             </p>
-            {[
-              { n: '1', unit: 'hour', sub: '', body: 'to grant cashless pre-authorisation once the hospital sends a complete request.' },
-              { n: '3', unit: 'hours', sub: '', body: 'to issue final authorisation at discharge, with the insurer bearing any extra hospital charge beyond that.' },
-              { n: '69', unit: 'per cent', sub: '', body: 'of general insurance grievances in FY 2024-25 were about claims: delays, underpayment or rejection.' },
-            ].map(({ n, unit, body }, i) => (
+            {REGULATORY_CLOCKS.map(({ n, unit, body }, i) => (
               <div key={i} className="grid grid-cols-[76px_1fr] gap-3.5 py-3.5 border-t border-[#C9D2C2] first:border-0">
                 <div className="font-display text-[26px] font-bold tracking-[-0.03em] text-[#0C3436]">
                   {n}<small className="block font-mono text-[10px] tracking-[.12em] uppercase text-[#7a8c80] font-normal mt-0.5">{unit}</small>

@@ -1,5 +1,11 @@
 import React from 'react'
 
+const ECOSYSTEM_NODES = [
+  { self: false, nm: '1FCode', ds: 'The financial operating system the group is built on.' },
+  { self: true,  nm: '1FC Insure', ds: 'Insurance broking, distribution and the case desk. You are here.' },
+  { self: false, nm: 'Shared foundation', ds: 'One platform layer, one security model and one design system across every 1FC product.' },
+]
+
 export default function EcosystemSection() {
   return (
     <section id="ecosystem" className="px-[var(--pad)] py-[clamp(46px,5.2vw,68px)]">
@@ -17,11 +23,7 @@ export default function EcosystemSection() {
           </p>
         </div>
         <div className="mt-[40px] grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {[
-            { self: false, nm: '1FCode', ds: 'The financial operating system the group is built on.' },
-            { self: true,  nm: '1FC Insure', ds: 'Insurance broking, distribution and the case desk. You are here.' },
-            { self: false, nm: 'Shared foundation', ds: 'One platform layer, one security model and one design system across every 1FC product.' },
-          ].map(({ self: isSelf, nm, ds }) => (
+          {ECOSYSTEM_NODES.map(({ self: isSelf, nm, ds }) => (
             <div
               key={nm}
               className={`rounded-[10px] p-5 transition-all rv ${

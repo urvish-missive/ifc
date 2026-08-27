@@ -10,6 +10,30 @@ const STAGE_OWNERS = [
   'Closed by a named coordinator',
 ]
 
+const RAIL_STEPS = [
+  { s: 0, t: 'Something happens, and nothing is connected' },
+  { s: 1, t: 'A case opens and takes an owner' },
+  { s: 2, t: 'Documents and the hospital, handled' },
+  { s: 3, t: 'Handed to the insurer, still tracked' },
+  { s: 4, t: 'Closed, and remembered' },
+]
+
+const CASE_ROWS = [
+  { at: 1, time: '23:41', title: 'Assistance requested', sub: 'Raised by a family member, not the policyholder' },
+  { at: 1, time: '23:44', title: 'Case opened, owner assigned', sub: 'Health claims desk, named coordinator' },
+  { at: 2, time: '23:52', title: 'Hospital desk contacted', sub: 'Coordination started with the admission team' },
+  { at: 2, time: '08:15', title: 'Checklist issued, seven documents', sub: 'Collected once, attached to the case' },
+  { at: 3, time: '14:02', title: 'Submitted to the insurer', sub: 'Decision authority passes here. Follow-up continues.' },
+  { at: 4, time: 'D3', title: 'Outcome recorded and explained', sub: 'In plain language, against the case' },
+]
+
+const PANEL_NODES = [
+  { at: 1, key: '', label: 'Coordinator', val: 'Named, on the case', sub: 'Not a queue, not a rotation' },
+  { at: 2, key: '', label: 'Documents', val: '7 of 7 collected', sub: 'Uploaded once, reused everywhere', bar: true },
+  { at: 3, key: 'warn', label: 'Boundary', val: 'Insurer decides', sub: '1FC keeps tracking from the outside' },
+  { at: 4, key: 'good', label: 'History', val: 'Attached to the customer', sub: 'Renewal starts here, not from zero' },
+]
+
 export default function CaseDeskSection() {
   const [stage, setStage] = useState(0)
 
@@ -72,13 +96,7 @@ export default function CaseDeskSection() {
             <div id="deskScene" data-stage={stage} className="scene desk-scene relative grid items-center gap-[clamp(20px,2.6vw,40px)] max-sm:grid-cols-1 max-sm:gap-5">
               {/* Left rail */}
               <ol className="rail" id="deskRail">
-                {[
-                  { s: 0, t: 'Something happens, and nothing is connected' },
-                  { s: 1, t: 'A case opens and takes an owner' },
-                  { s: 2, t: 'Documents and the hospital, handled' },
-                  { s: 3, t: 'Handed to the insurer, still tracked' },
-                  { s: 4, t: 'Closed, and remembered' },
-                ].map(({ s, t }) => (
+                {RAIL_STEPS.map(({ s, t }) => (
                   <li
                     key={s}
                     className={`${stage > s ? 'on' : ''} ${stage === s ? 'cur' : ''} cursor-pointer`}
@@ -110,14 +128,7 @@ export default function CaseDeskSection() {
                     </span>
                   </div>
                   <div className="case-body px-[18px] py-[6px_16px] max-sm:py-1.5">
-                    {[
-                      { at: 1, time: '23:41', title: 'Assistance requested', sub: 'Raised by a family member, not the policyholder' },
-                      { at: 1, time: '23:44', title: 'Case opened, owner assigned', sub: 'Health claims desk, named coordinator' },
-                      { at: 2, time: '23:52', title: 'Hospital desk contacted', sub: 'Coordination started with the admission team' },
-                      { at: 2, time: '08:15', title: 'Checklist issued, seven documents', sub: 'Collected once, attached to the case' },
-                      { at: 3, time: '14:02', title: 'Submitted to the insurer', sub: 'Decision authority passes here. Follow-up continues.' },
-                      { at: 4, time: 'D3', title: 'Outcome recorded and explained', sub: 'In plain language, against the case' },
-                    ].map(({ at, time, title, sub }) => {
+                    {CASE_ROWS.map(({ at, time, title, sub }) => {
                       const isNow = at === stage
                       const isDone = stage >= at
                       return (
@@ -148,12 +159,7 @@ export default function CaseDeskSection() {
 
               {/* Right panel */}
               <div className="panel flex flex-col gap-3 max-sm:hidden">
-                {[
-                  { at: 1, key: '', label: 'Coordinator', val: 'Named, on the case', sub: 'Not a queue, not a rotation' },
-                  { at: 2, key: '', label: 'Documents', val: '7 of 7 collected', sub: 'Uploaded once, reused everywhere', bar: true },
-                  { at: 3, key: 'warn', label: 'Boundary', val: 'Insurer decides', sub: '1FC keeps tracking from the outside' },
-                  { at: 4, key: 'good', label: 'History', val: 'Attached to the customer', sub: 'Renewal starts here, not from zero' },
-                ].map(({ at, key, label, val, sub, bar }) => (
+                {PANEL_NODES.map(({ at, key, label, val, sub, bar }) => (
                   <div key={label} className={`pnode ${key} ${stage >= at ? 'on' : ''}`}>
                     <div className="pk">{label}</div>
                     <div className="pv">{val}<small>{sub}</small></div>

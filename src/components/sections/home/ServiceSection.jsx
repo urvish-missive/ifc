@@ -1,5 +1,12 @@
 import React from 'react'
 
+const SERVICES = [
+  { tag: 'Customer record', h: 'One place where your cover actually lives.', p: 'Policies, family members, contact history and past cases sit in a single customer record, so the team that picks up your call already knows what you hold and what happened last time.' },
+  { tag: 'Case desk', h: 'Every request becomes a case, not a phone call.', p: 'A service request, a claim intimation and a hospital coordination call all open the same object, with an owner, a status, a document set and a full history. Nothing lives in a thread only one person can see.', chips: ['named owner', 'live status', 'document checklist', 'turnaround clock'] },
+  { tag: 'Hospitalisation', h: 'Someone on the phone who has done this before.', p: 'Hospital-facing coordination and documentation support, insurer and TPA follow-up, and ambulance assistance where that service is available under the applicable 1FC service model.' },
+  { tag: 'Renewal', h: 'Renewal as continuity, not a cold call.', p: 'Reminders, advice and renewal support from the same relationship, across health, life and general insurance, handled by the people who handled your claim.' },
+]
+
 export default function ServiceSection() {
   return (
     <section id="service" className="bg-[#EAEDE3] px-[var(--pad)] py-[clamp(54px,6.2vw,80px)]">
@@ -14,12 +21,7 @@ export default function ServiceSection() {
           </h2>
         </div>
         <div className="mt-[clamp(28px,3.2vw,42px)]">
-          {[
-            { tag: 'Customer record', h: 'One place where your cover actually lives.', p: 'Policies, family members, contact history and past cases sit in a single customer record, so the team that picks up your call already knows what you hold and what happened last time.' },
-            { tag: 'Case desk', h: 'Every request becomes a case, not a phone call.', p: 'A service request, a claim intimation and a hospital coordination call all open the same object, with an owner, a status, a document set and a full history. Nothing lives in a thread only one person can see.', chips: ['named owner', 'live status', 'document checklist', 'turnaround clock'] },
-            { tag: 'Hospitalisation', h: 'Someone on the phone who has done this before.', p: 'Hospital-facing coordination and documentation support, insurer and TPA follow-up, and ambulance assistance where that service is available under the applicable 1FC service model.' },
-            { tag: 'Renewal', h: 'Renewal as continuity, not a cold call.', p: 'Reminders, advice and renewal support from the same relationship, across health, life and general insurance, handled by the people who handled your claim.' },
-          ].map(({ tag, h, p, chips }) => (
+          {SERVICES.map(({ tag, h, p, chips }) => (
             <div key={tag} className="grid grid-cols-1 lg:grid-cols-[minmax(200px,.85fr)_minmax(0,1.15fr)] gap-3 lg:gap-[clamp(20px,3vw,44px)] py-[clamp(24px,2.8vw,34px)] border-t border-[#C9D2C2] rv">
               <div>
                 <div className="mb-3 font-mono text-[10.5px] tracking-[.17em] uppercase text-[#7A8C80]">{tag}</div>

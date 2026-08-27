@@ -1,6 +1,14 @@
 import React from 'react'
 import MascotIllustration from '../../ui/MascotIllustration'
 
+const HERO_CARD_ROWS = [
+  { time: '23:41', cls: 'done', title: 'Assistance requested', sub: 'Raised by a family member at the admission desk.' },
+  { time: '23:44', cls: 'done', title: 'Case opened, owner assigned', sub: 'Routed to the health claims desk.' },
+  { time: '23:52', cls: 'now', title: 'Hospital coordination underway', sub: 'Admission desk contacted, checklist issued to the family.' },
+]
+
+const HERO_META_TAGS = ['Health, life and general', 'Broking and POSP', 'Hospital coordination']
+
 export default function HomeHero() {
   return (
     <section id="top" className="relative overflow-hidden pt-[clamp(48px,7vw,84px)] pb-[clamp(28px,4vw,56px)] max-sm:pt-[92px]">
@@ -30,9 +38,9 @@ export default function HomeHero() {
             </a>
           </div>
           <div className="mt-8 pt-[18px] border-t border-[rgba(246,247,241,.13)] flex flex-wrap gap-5 font-mono text-[11px] tracking-[.06em] uppercase text-[#7A948D] rv">
-            <span>Health, life and general</span>
-            <span>Broking and POSP</span>
-            <span>Hospital coordination</span>
+            {HERO_META_TAGS.map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
           </div>
         </div>
 
@@ -50,11 +58,7 @@ export default function HomeHero() {
 
             {/* Card rows */}
             <div className="px-[18px] py-[18px]">
-              {[
-                { time: '23:41', cls: 'done', title: 'Assistance requested', sub: 'Raised by a family member at the admission desk.' },
-                { time: '23:44', cls: 'done', title: 'Case opened, owner assigned', sub: 'Routed to the health claims desk.' },
-                { time: '23:52', cls: 'now', title: 'Hospital coordination underway', sub: 'Admission desk contacted, checklist issued to the family.' },
-              ].map(({ time, cls, title, sub }) => (
+              {HERO_CARD_ROWS.map(({ time, cls, title, sub }) => (
                 <div key={time} className="grid grid-cols-[78px_20px_1fr] gap-3 items-start py-[11px] border-b border-dashed border-[rgba(246,247,241,.09)] last:border-0">
                   <span className="font-mono text-[11.5px] text-[#7A948D] pt-0.5">{time}</span>
                   <span className="flex justify-center pt-1.5">
