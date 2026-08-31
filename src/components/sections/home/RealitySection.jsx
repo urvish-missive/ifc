@@ -7,10 +7,10 @@ const STAT_SIGNALS = [
 ]
 
 const BAR_SEGMENTS = [
-  { key: 'paid', w: 71.29, col: '#8fcba6', label: '\u20B971.29 paid' },
-  { key: 'dis', w: 12.90, col: '#ebbe72', label: '12.90' },
-  { key: 'rep', w: 9.34, col: '#dc8c74', label: '9.34' },
-  { key: 'out', w: 6.48, col: '#bfcbbe', label: '6.48' },
+  { key: 'paid', w: 58, col: '#8fcba6', label: '\u20B971.29 paid' },
+  { key: 'dis', w:20, col: '#ebbe72', label: '12.90' },
+  { key: 'rep', w: 12, col: '#dc8c74', label: '9.34' },
+  { key: 'out', w: 10, col: '#bfcbbe', label: '6.48' },
 ]
 
 const LEGEND_ITEMS = [
@@ -148,7 +148,7 @@ export default function RealitySection() {
               ref={barRef}
               role="group"
               aria-label="Health insurance claim amounts, FY 2023-24"
-              className="flex h-[76px] rounded-[8px] overflow-hidden border border-[#B4C0AC] bg-[#dde3d6] mt-8"
+              className="flex h-[76px] rounded-[8px] overflow-hidden border border-[#B4C0AC] bg-[#dde3d6]"
             >
               {BAR_SEGMENTS.map(({ key, w, col, label }) => (
                 <button

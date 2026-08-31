@@ -38,14 +38,40 @@ export default function CaseDeskSection() {
   const [stage, setStage] = useState(0)
 
   useEffect(() => {
-    // On mobile/tablet, jump to final stage immediately so card + panel are fully revealed
-    if (window.innerWidth < 1080) {
-      setStage(4)
-      return
+    const isMobile = window.innerWidth < 1080
+    const STAGE_THRESHOLDS = [0, 0.06, 0.24, 0.46, 0.70]
+
+    if (isMobile) {
+      // Mobile: progressive stage based on how far user scrolled into the section
+      const section = document.getElementById('desk')
+      if (!section) return
+      const MOBILE_THRESHOLDS = [0, 0.01, 0.10, 0.22, 0.38]
+
+      function onMobileScroll() {
+        const r = section.getBoundingClientRect()
+        const navH = 72
+        // progress: 0 when section top hits nav, 1 when section bottom is near viewport top
+        const total = r.height + window.innerHeight - navH
+        const p = Math.min(Math.max((navH - r.top) / total, 0), 1)
+        let n = 0
+        for (let i = MOBILE_THRESHOLDS.length - 1; i >= 0; i--) {
+          if (p >= MOBILE_THRESHOLDS[i]) { n = i; break }
+        }
+        setStage(n)
+      }
+
+      window.addEventListener('scroll', onMobileScroll, { passive: true })
+      window.addEventListener('resize', onMobileScroll, { passive: true })
+      onMobileScroll()
+
+      return () => {
+        window.removeEventListener('scroll', onMobileScroll)
+        window.removeEventListener('resize', onMobileScroll)
+      }
     }
 
+    // Desktop: scroll-pinned stage progression
     const deskTrack = document.getElementById('deskTrack')
-    const STAGE_THRESHOLDS = [0, 0.06, 0.24, 0.46, 0.70]
 
     function onDeskScroll() {
       if (!deskTrack) return
