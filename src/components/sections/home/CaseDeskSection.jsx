@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import  { useState, useEffect } from 'react'
 import MascotIllustration from '../../ui/MascotIllustration'
 
 const STAGE_TITLES = ['Unassigned', 'Open', 'In progress', 'With insurer', 'Closed']
@@ -39,19 +39,18 @@ export default function CaseDeskSection() {
 
   useEffect(() => {
     const isMobile = window.innerWidth < 1080
-    const STAGE_THRESHOLDS = [0, 0.06, 0.24, 0.46, 0.70]
 
     if (isMobile) {
       // Mobile: progressive stage based on how far user scrolled into the section
       const section = document.getElementById('desk')
       if (!section) return
-      const MOBILE_THRESHOLDS = [0, 0.01, 0.10, 0.22, 0.38]
+      const MOBILE_THRESHOLDS = [0, 0, 0.04, 0.12, 0.24]
 
       function onMobileScroll() {
         const r = section.getBoundingClientRect()
         const navH = 72
-        // progress: 0 when section top hits nav, 1 when section bottom is near viewport top
-        const total = r.height + window.innerHeight - navH
+        // start earlier: use half the section height as denominator
+        const total = r.height * 0.4 + window.innerHeight - navH
         const p = Math.min(Math.max((navH - r.top) / total, 0), 1)
         let n = 0
         for (let i = MOBILE_THRESHOLDS.length - 1; i >= 0; i--) {
@@ -71,6 +70,7 @@ export default function CaseDeskSection() {
     }
 
     // Desktop: scroll-pinned stage progression
+    const STAGE_THRESHOLDS = [0, 0.06, 0.24, 0.46, 0.70]
     const deskTrack = document.getElementById('deskTrack')
 
     function onDeskScroll() {

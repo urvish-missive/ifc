@@ -233,8 +233,7 @@ details[open] > summary::after { content: "-"; }
 }
 
 /* --- Field --- */
-.field { position: relative; min-height: 360px; }
-@media (max-width: 1080px) { .field { min-height: 0; } }
+
 
 /* --- Fragments --- */
 .frags { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
@@ -361,16 +360,7 @@ details[open] > summary::after { content: "-"; }
   background: linear-gradient(180deg, rgba(18,73,75,.95), rgba(10,45,47,.95));
   border: 1px solid var(--line-d2);
 }
-.case-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--line-d);
-  background: rgba(6, 28, 30, 0.45);
-}
-.case-id { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.08em; }
+
 .pill {
   font-family: var(--font-mono);
   font-size: 10.5px;

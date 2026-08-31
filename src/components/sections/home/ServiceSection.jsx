@@ -1,5 +1,3 @@
-import React from 'react'
-
 const SERVICES = [
   { tag: 'Customer record', h: 'One place where your cover actually lives.', p: 'Policies, family members, contact history and past cases sit in a single customer record, so the team that picks up your call already knows what you hold and what happened last time.' },
   { tag: 'Case desk', h: 'Every request becomes a case, not a phone call.', p: 'A service request, a claim intimation and a hospital coordination call all open the same object, with an owner, a status, a document set and a full history. Nothing lives in a thread only one person can see.', chips: ['named owner', 'live status', 'document checklist', 'turnaround clock'] },

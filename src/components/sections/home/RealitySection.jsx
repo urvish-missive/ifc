@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const STAT_SIGNALS = [
   { key: 'claims', unit: 'crore', label: 'health insurance claims were filed with Indian insurers in FY 2023-24.' },
@@ -64,20 +64,14 @@ export default function RealitySection() {
   const [counts, setCounts] = useState({ claims: 0, settled: 0, avg: 0 })
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in')
-            if (entry.target === barRef.current) setBarDrawn(true)
-          }
-        })
-      },
+    // Only watch the bar for draw animation — .rv reveal is handled by Home.jsx
+    const barObs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setBarDrawn(true) },
       { threshold: 0.14 },
     )
-    document.querySelectorAll('.rv').forEach((el) => observer.observe(el))
-    if (barRef.current) observer.observe(barRef.current)
+    if (barRef.current) barObs.observe(barRef.current)
 
+    // Count-up animation
     let countStarted = false
     const countObserver = new IntersectionObserver(
       (entries) => {
@@ -103,7 +97,7 @@ export default function RealitySection() {
     const el = document.getElementById('reality')
     if (el) countObserver.observe(el)
 
-    return () => { observer.disconnect(); countObserver.disconnect() }
+    return () => { barObs.disconnect(); countObserver.disconnect() }
   }, [])
 
   return (

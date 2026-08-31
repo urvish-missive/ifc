@@ -1,5 +1,3 @@
-import React from 'react'
-
 const TRUST_ITEMS = [
   { h: 'Built on 1FC infrastructure', p: '1FC Insure shares engineering standards, design language and platform thinking with 1FCode, the group\u2019s financial operating system. It is not a brochure with a contact form behind it.' },
   { h: 'One relationship, whole lifecycle', p: 'Advisory, distribution, operations, claims, hospital coordination and renewals work from one customer record, so you never have to explain your situation twice.' },

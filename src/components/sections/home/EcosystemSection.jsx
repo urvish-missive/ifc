@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ECOSYSTEM_NODES = [
   { self: false, nm: '1FCode', ds: 'The financial operating system the group is built on.' },
   { self: true,  nm: '1FC Insure', ds: 'Insurance broking, distribution and the case desk. You are here.' },

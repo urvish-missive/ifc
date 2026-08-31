@@ -1,4 +1,3 @@
-import React from 'react'
 import MascotIllustration from '../../ui/MascotIllustration'
 
 const HERO_CARD_ROWS = [

@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function IdeaSection() {
   return (
     <section id="idea" className="px-[var(--pad)] py-[clamp(54px,6.2vw,80px)]">

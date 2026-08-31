@@ -1,4 +1,3 @@
-import React from 'react'
 import MascotIllustration from '../../ui/MascotIllustration'
 
 export default function HumanSection() {

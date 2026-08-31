@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import MascotIllustration from '../../ui/MascotIllustration'
 
 export default function FinalCtaSection() {
@@ -12,7 +12,13 @@ export default function FinalCtaSection() {
 
   useEffect(() => {
     const mascot = document.getElementById('mascotCta')
-    if (mascot) setTimeout(() => mascot.classList.add('on'), 300)
+    if (!mascot) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) mascot.classList.add('on') },
+      { threshold: 0.1 },
+    )
+    obs.observe(mascot)
+    return () => obs.disconnect()
   }, [])
 
   const handleFormSubmit = (e) => {

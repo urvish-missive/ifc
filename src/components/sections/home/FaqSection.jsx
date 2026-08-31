@@ -1,5 +1,3 @@
-import React from 'react'
-
 const FAQ_ITEMS = [
   { q: 'What exactly is 1FC Insure?', p: 'An insurance broking and POSP distribution business with a customer assistance layer built into it. You buy a policy through 1FC, and the same relationship handles service requests, hospitalisation coordination, claim assistance, documentation and renewals afterwards.' },
   { q: 'Is it an insurance company, a broker, or a platform?', p: 'A broker with a service platform behind it. 1FC does not underwrite risk and does not settle claims, because insurers do that. The platform exists so that the assistance we provide is owned, tracked and measurable rather than dependent on who happens to answer the phone.' },
