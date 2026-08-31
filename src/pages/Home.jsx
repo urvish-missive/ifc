@@ -2,10 +2,14 @@ import React, { useEffect } from 'react'
 import HomeHero from '../components/sections/home/HomeHero'
 import RealitySection from '../components/sections/home/RealitySection'
 import IdeaSection from '../components/sections/home/IdeaSection'
+import FiveThingsSection from '../components/sections/home/FiveThingsSection'
+import FourStagesSection from '../components/sections/home/FourStagesSection'
+import AhaSection from '../components/sections/home/AhaSection'
 import CaseDeskSection from '../components/sections/home/CaseDeskSection'
 import ServiceSection from '../components/sections/home/ServiceSection'
 import TrustSection from '../components/sections/home/TrustSection'
 import HumanSection from '../components/sections/home/HumanSection'
+import TrustNewSection from '../components/sections/home/TrustNewSection'
 import EcosystemSection from '../components/sections/home/EcosystemSection'
 import FaqSection from '../components/sections/home/FaqSection'
 import FinalCtaSection from '../components/sections/home/FinalCtaSection'
@@ -37,10 +41,14 @@ export default function Home() {
       <HomeHero />
       <RealitySection />
       <IdeaSection />
+      <FiveThingsSection />
+      <FourStagesSection />
+      <AhaSection />
       <CaseDeskSection />
       <ServiceSection />
       <TrustSection />
       <HumanSection />
+      <TrustNewSection />
       <EcosystemSection />
       <FaqSection />
       <FinalCtaSection />
