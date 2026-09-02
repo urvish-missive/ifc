@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
-const NAV_LINKS = [
-  { label: 'The reality', href: '#reality' },
-  { label: 'The case desk', href: '#desk' },
-  { label: 'What you get', href: '#service' },
-  { label: 'Why 1FC Insure', href: '#trust' },
+const NAV_ITEMS = [
+  { label: 'Insurance', href: '/#cover' },
+  { label: 'Claims', href: '/#claims' },
+  { label: 'How it works', to: '/how-it-works', isRoute: true },
+  { label: 'Why 1FC Insure', href: '/#trust' },
 ]
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -20,46 +21,60 @@ export default function Header() {
   }, [mobileOpen])
 
   return (
-    <header
-      className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.08] bg-[#09272A]"
-    >
-      <nav className="mx-auto flex h-[72px] w-full max-w-[1280px] items-center px-[var(--pad)]">
+    <header className="sticky top-0 z-50 border-b border-[rgba(246,247,241,.13)] bg-[#061C1E]">
+      <nav className="mx-auto flex h-[70px] w-full max-w-[var(--maxw)] items-center justify-between px-[var(--pad)]">
         {/* Brand */}
         <Link
           to="/"
           aria-label="1FC Insure — home"
           className="flex items-center gap-2.5"
         >
-          <span className="font-display text-[1.35rem] font-bold tracking-tight text-cream">
+          <span className="font-display text-[1.4rem] font-bold tracking-tight text-[#F6F7F1]">
             1FC <span className="font-normal">Insure</span>
           </span>
         </Link>
 
         {/* Desktop nav links */}
         <ul className="ml-auto hidden items-center gap-8 lg:flex">
-          {NAV_LINKS.map((item) => (
-            <li key={item.label}>
-              <a
-                href={item.href}
-                className="relative py-2 text-[14.5px] font-medium text-[#C6D3CB] transition-colors hover:text-cream after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:w-0 after:bg-marigold after:transition-all after:duration-300 hover:after:w-full"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const isHowItWorksActive = item.isRoute && location.pathname === '/how-it-works'
+            return (
+              <li key={item.label}>
+                {item.isRoute ? (
+                  <Link
+                    to={item.to}
+                    className={`relative py-1 text-[14.5px] font-medium transition-colors hover:text-[#F6F7F1] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-[#E0A139] after:transition-all after:duration-300 ${
+                      isHowItWorksActive
+                        ? 'text-[#F6F7F1] after:w-full'
+                        : 'text-[#C6D3CB] after:w-0 hover:after:w-full'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    className="relative py-1 text-[14.5px] font-medium text-[#C6D3CB] transition-colors hover:text-[#F6F7F1] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[#E0A139] after:transition-all after:duration-300 hover:after:w-full"
+                  >
+                    {item.label}
+                  </a>
+                )}
+              </li>
+            )
+          })}
         </ul>
 
         {/* CTA button */}
         <a
-          href="#access"
-          className="ml-8 hidden rounded-lg bg-marigold px-6 py-2.5 text-[14.5px] font-semibold text-[#20160A] transition-all hover:-translate-y-0.5 hover:bg-[#EDB253] hover:shadow-lg lg:inline-flex"
+          href="/#access"
+          className="ml-8 hidden rounded-[9px] bg-[#E0A139] px-[17px] py-[10px] text-[14px] font-semibold text-[#20160A] transition-all hover:-translate-y-0.5 hover:bg-[#EDB253] lg:inline-flex"
         >
-          Request early access
+          Start with 1FC Insure
         </a>
 
         {/* Mobile toggle */}
         <button
-          className="ml-auto grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/5 text-cream lg:hidden"
+          className="ml-auto grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/5 text-[#F6F7F1] lg:hidden"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
@@ -76,29 +91,39 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-auto max-w-[1280px] border-t border-white/[0.06] bg-[#0a2a27]/98 backdrop-blur-xl lg:hidden"
+            className="mx-auto max-w-[var(--maxw)] border-t border-[rgba(246,247,241,.13)] bg-[#061C1E] backdrop-blur-xl lg:hidden"
           >
             <div className="px-[var(--pad)] py-5">
               <ul className="flex flex-col gap-1">
-                {NAV_LINKS.map((item) => (
+                {NAV_ITEMS.map((item) => (
                   <li key={item.label}>
-                    <a
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block rounded-xl px-4 py-3 text-[1rem] font-medium text-[#C6D3CB] transition-colors hover:bg-white/[0.05] hover:text-cream"
-                    >
-                      {item.label}
-                    </a>
+                    {item.isRoute ? (
+                      <Link
+                        to={item.to}
+                        onClick={() => setMobileOpen(false)}
+                        className="block py-3.5 border-b border-[rgba(246,247,241,.13)] text-[16px] font-medium text-[#C6D3CB] transition-colors hover:text-[#F6F7F1]"
+                      >
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={item.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="block py-3.5 border-b border-[rgba(246,247,241,.13)] text-[16px] font-medium text-[#C6D3CB] transition-colors hover:text-[#F6F7F1]"
+                      >
+                        {item.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
 
               <a
-                href="#access"
+                href="/#access"
                 onClick={() => setMobileOpen(false)}
-                className="mt-4 flex w-full items-center justify-center rounded-lg bg-marigold px-6 py-3 text-[1rem] font-semibold text-[#20160A]"
+                className="mt-5 flex w-full items-center justify-center rounded-[9px] bg-[#E0A139] px-6 py-3.5 text-[15px] font-semibold text-[#20160A]"
               >
-                Request early access
+                Start with 1FC Insure
               </a>
             </div>
           </motion.div>

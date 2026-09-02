@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import HomeHero from '../components/sections/home/HomeHero'
-import RealitySection from '../components/sections/home/RealitySection'
 import IdeaSection from '../components/sections/home/IdeaSection'
-import FiveThingsSection from '../components/sections/home/FiveThingsSection'
-import FourStagesSection from '../components/sections/home/FourStagesSection'
-import AhaSection from '../components/sections/home/AhaSection'
+import InsuranceSection from '../components/sections/home/InsuranceSection'
+import RealitySection from '../components/sections/home/RealitySection'
 import CaseDeskSection from '../components/sections/home/CaseDeskSection'
-import ServiceSection from '../components/sections/home/ServiceSection'
+import HowPiecesConnectSection from '../components/sections/home/HowPiecesConnectSection'
+import CustomerJourneySection from '../components/sections/home/CustomerJourneySection'
 import TrustSection from '../components/sections/home/TrustSection'
 import HumanSection from '../components/sections/home/HumanSection'
-import TrustNewSection from '../components/sections/home/TrustNewSection'
-import EcosystemSection from '../components/sections/home/EcosystemSection'
+import GroupSection from '../components/sections/home/GroupSection'
 import FaqSection from '../components/sections/home/FaqSection'
 import FinalCtaSection from '../components/sections/home/FinalCtaSection'
 
@@ -25,7 +23,7 @@ export default function Home() {
           }
         })
       },
-      { threshold: 0.14 },
+      { threshold: 0.14, rootMargin: '0px 0px -6% 0px' },
     )
 
     const rvElements = document.querySelectorAll('.rv')
@@ -39,17 +37,15 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#061C1E] text-[#F6F7F1]">
       <HomeHero />
-      <RealitySection />
       <IdeaSection />
-      <FiveThingsSection />
-      <FourStagesSection />
-      <AhaSection />
+      <InsuranceSection />
+      <RealitySection />
       <CaseDeskSection />
-      <ServiceSection />
+      <HowPiecesConnectSection />
+      <CustomerJourneySection />
       <TrustSection />
       <HumanSection />
-      <TrustNewSection />
-      <EcosystemSection />
+      <GroupSection />
       <FaqSection />
       <FinalCtaSection />
     </div>

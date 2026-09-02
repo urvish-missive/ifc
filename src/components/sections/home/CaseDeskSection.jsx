@@ -1,37 +1,30 @@
-import  { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import MascotIllustration from '../../ui/MascotIllustration'
 
-const STAGE_TITLES = ['Unassigned', 'Open', 'In progress', 'With insurer', 'Closed']
-const STAGE_OWNERS = [
-  'Waiting for an owner',
-  'Owned by a named coordinator',
-  'Owned by a named coordinator',
-  'Owned by a named coordinator',
-  'Closed by a named coordinator',
+const STATES = ['Not started', 'With us', 'In progress', 'With insurer', 'Resolved']
+const OWNERS = [
+  'Waiting for someone to take this on',
+  'Your coordinator, on this until it closes',
+  'Your coordinator, on this until it closes',
+  'Your coordinator, on this until it closes',
+  'Resolved and explained by your coordinator',
 ]
 
 const RAIL_STEPS = [
-  { s: 0, t: 'Something happens, and nothing is connected' },
-  { s: 1, t: 'A case opens and takes an owner' },
-  { s: 2, t: 'Documents and the hospital, handled' },
-  { s: 3, t: 'Handed to the insurer, still tracked' },
-  { s: 4, t: 'Closed, and remembered' },
+  'Something happens, and nothing is connected',
+  'You tell 1FC Insure, and someone takes it on',
+  'Documentation and hospital coordination',
+  'With the insurer, and still being followed',
+  'Guidance until it is resolved',
 ]
 
 const CASE_ROWS = [
-  { at: 1, time: '23:41', title: 'Assistance requested', sub: 'Raised by a family member, not the policyholder' },
-  { at: 1, time: '23:44', title: 'Case opened, owner assigned', sub: 'Health claims desk, named coordinator' },
-  { at: 2, time: '23:52', title: 'Hospital desk contacted', sub: 'Coordination started with the admission team' },
-  { at: 2, time: '08:15', title: 'Checklist issued, seven documents', sub: 'Collected once, attached to the case' },
-  { at: 3, time: '14:02', title: 'Submitted to the insurer', sub: 'Decision authority passes here. Follow-up continues.' },
-  { at: 4, time: 'D3', title: 'Outcome recorded and explained', sub: 'In plain language, against the case' },
-]
-
-const PANEL_NODES = [
-  { at: 1, key: '', label: 'Coordinator', val: 'Named, on the case', sub: 'Not a queue, not a rotation' },
-  { at: 2, key: '', label: 'Documents', val: '7 of 7 collected', sub: 'Uploaded once, reused everywhere', bar: true },
-  { at: 3, key: 'warn', label: 'Boundary', val: 'Insurer decides', sub: '1FC keeps tracking from the outside' },
-  { at: 4, key: 'good', label: 'History', val: 'Attached to the customer', sub: 'Renewal starts here, not from zero' },
+  { from: 1, time: '23:41', title: 'You tell us something happened', sub: 'A call, a message, or the hospital reaching us directly' },
+  { from: 1, time: '23:44', title: 'A coordinator takes it on', sub: 'One named person, on this until it closes' },
+  { from: 2, time: '23:52', title: 'We speak to the hospital', sub: 'Insurance coordination starts with the admission team' },
+  { from: 2, time: '08:15', title: 'Your document list, in one message', sub: 'Collected once, kept with the claim' },
+  { from: 3, time: '14:02', title: 'Filed with the insurer', sub: 'The decision is theirs. The following up stays ours.' },
+  { from: 4, time: 'D3', title: 'The outcome, explained in plain language', sub: 'What was paid, what was not, and what to do next' },
 ]
 
 export default function CaseDeskSection() {
@@ -39,159 +32,144 @@ export default function CaseDeskSection() {
 
   useEffect(() => {
     const isMobile = window.innerWidth < 1080
+    const TH = [0, 0.08, 0.31, 0.54, 0.77]
+    const track = document.getElementById('deskTrack')
 
-    if (isMobile) {
-      // Mobile: progressive stage based on how far user scrolled into the section
-      const section = document.getElementById('desk')
-      if (!section) return
-      const MOBILE_THRESHOLDS = [0, 0, 0.04, 0.12, 0.24]
-
-      function onMobileScroll() {
-        const r = section.getBoundingClientRect()
-        const navH = 72
-        // start earlier: use half the section height as denominator
-        const total = r.height * 0.4 + window.innerHeight - navH
-        const p = Math.min(Math.max((navH - r.top) / total, 0), 1)
-        let n = 0
-        for (let i = MOBILE_THRESHOLDS.length - 1; i >= 0; i--) {
-          if (p >= MOBILE_THRESHOLDS[i]) { n = i; break }
-        }
-        setStage(n)
-      }
-
-      window.addEventListener('scroll', onMobileScroll, { passive: true })
-      window.addEventListener('resize', onMobileScroll, { passive: true })
-      onMobileScroll()
-
-      return () => {
-        window.removeEventListener('scroll', onMobileScroll)
-        window.removeEventListener('resize', onMobileScroll)
-      }
-    }
-
-    // Desktop: scroll-pinned stage progression
-    const STAGE_THRESHOLDS = [0, 0.06, 0.24, 0.46, 0.70]
-    const deskTrack = document.getElementById('deskTrack')
-
-    function onDeskScroll() {
-      if (!deskTrack) return
-      const r = deskTrack.getBoundingClientRect()
-      const navH = 72
+    function onScroll() {
+      if (!track) return
+      const r = track.getBoundingClientRect()
+      const navH = 70
       const span = r.height - (window.innerHeight - navH)
       if (span <= 0) return
       const p = Math.min(Math.max((navH - r.top) / span, 0), 1)
       let n = 0
-      for (let i = STAGE_THRESHOLDS.length - 1; i >= 0; i--) {
-        if (p >= STAGE_THRESHOLDS[i]) { n = i; break }
+      for (let i = TH.length - 1; i >= 0; i--) {
+        if (p >= TH[i]) {
+          n = i
+          break
+        }
       }
       setStage(n)
     }
 
-    window.addEventListener('scroll', onDeskScroll, { passive: true })
-    window.addEventListener('resize', onDeskScroll, { passive: true })
-    onDeskScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
+    onScroll()
 
     return () => {
-      window.removeEventListener('scroll', onDeskScroll)
-      window.removeEventListener('resize', onDeskScroll)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
     }
   }, [])
 
   return (
-    <section id="desk" className="bg-[#09272A]">
+    <section id="claims" className="desk bg-[#09272A] relative">
       <div id="deskTrack" className="desk-track relative">
-        <div className="sticky top-[70px] h-[calc(100vh-70px)] min-h-[620px] flex items-center overflow-hidden max-sm:static max-sm:h-auto max-sm:min-h-0 max-sm:overflow-visible max-sm:py-8">
-          <div className="w-full px-[var(--pad)] max-w-[var(--maxw)] mx-auto">
-            {/* Desk header */}
-            <div className="mb-[clamp(20px,2.6vw,34px)] flex flex-wrap items-end justify-between gap-3 max-sm:flex-col max-sm:gap-3">
+        <div className="desk-sticky sticky top-[70px] h-[calc(100vh-70px)] min-h-[620px] flex items-center overflow-hidden max-lg:static max-lg:h-auto max-lg:min-h-0 max-lg:overflow-visible max-lg:pt-[22px] max-lg:pb-12">
+          <div className="desk-inner w-full max-w-[var(--maxw)] mx-auto px-[var(--pad)]">
+            {/* Header */}
+            <div className="desk-head flex justify-between items-end gap-6 flex-wrap mb-[clamp(20px,2.6vw,34px)] max-lg:items-start max-lg:mb-[18px]">
               <div>
-                <span className="inline-flex items-center gap-3 font-mono text-[11px] tracking-[.19em] uppercase text-[#7A948D]">
+                <span className="label font-mono text-[11px] tracking-[.19em] uppercase text-[#7A948D] inline-flex items-center gap-3">
                   <span className="w-[26px] h-px bg-[#E0A139] flex-none" />
-                  The case desk
+                  When you need to claim
                 </span>
-                <h2 className="mt-4 text-[clamp(27px,3.3vw,43px)] max-sm:text-[clamp(22px,5vw,32px)] font-display font-semibold tracking-[-0.02em] leading-[1.05] text-[#F6F7F1]">
-                  Watch one night turn into one case.
+                <h2 className="mt-4 text-[clamp(27px,3.3vw,43px)] font-display font-bold tracking-[-0.032em] leading-[1.04] text-[#F6F7F1] max-w-[19ch] max-lg:max-w-none max-lg:text-[clamp(24px,6.4vw,32px)] max-lg:mt-3.5">
+                  You should not have to work out what happens next.
                 </h2>
               </div>
-              <div className="w-[120px] h-[3px] flex-none overflow-hidden rounded-sm bg-[rgba(246,247,241,.13)] max-sm:w-full max-sm:mt-2">
-                <div style={{ width: `${(stage / 4) * 100}%`, transition: 'width .4s cubic-bezier(.2,.7,.3,1)' }} className="h-full bg-[#E0A139] rounded-sm" />
+              <div className="desk-progress w-[120px] h-[3px] bg-[rgba(246,247,241,.13)] rounded-sm overflow-hidden flex-none max-lg:hidden" aria-hidden="true">
+                <i
+                  id="deskBar"
+                  style={{ width: `${(stage / 4) * 100}%` }}
+                  className="block h-full bg-[#E0A139] transition-[width] duration-500 ease-[cubic-bezier(.2,.7,.3,1)]"
+                />
               </div>
             </div>
 
-            {/* Scene */}
-            <div id="deskScene" data-stage={stage} className="scene desk-scene relative grid items-center gap-[clamp(20px,2.6vw,40px)] max-sm:grid-cols-1 max-sm:gap-5">
-              {/* Left rail */}
+            {/* Scene Grid */}
+            <div id="deskScene" data-stage={stage} className="scene desk-scene relative grid items-center gap-[clamp(20px,2.6vw,40px)] max-lg:grid-cols-1 max-lg:gap-4">
+              {/* Left Rail */}
               <ol className="rail" id="deskRail">
-                {RAIL_STEPS.map(({ s, t }) => (
+                {RAIL_STEPS.map((t, i) => (
                   <li
-                    key={s}
-                    className={`${stage > s ? 'on' : ''} ${stage === s ? 'cur' : ''} cursor-pointer`}
-                    onClick={() => setStage(s)}
+                    key={t}
+                    className={`${stage > i ? 'on' : ''} ${stage === i ? 'cur' : ''} cursor-pointer`}
+                    onClick={() => setStage(i)}
                   >
                     {t}
                   </li>
                 ))}
               </ol>
 
-              {/* Centre: field + card + mascot */}
-              <div className="relative lg:pl-[clamp(0px,7.6vw,112px)]">
-                {/* Fragment cards */}
-                <div className="frags absolute inset-0 pointer-events-none z-1 max-sm:hidden">
-                  <div className="frag f1"><b>Hospital admission desk</b>asks for the policy</div>
-                  <div className="frag f2"><b>Policy PDF</b>in an email from 2023</div>
-                  <div className="frag f3"><b>Insurer helpline</b>on hold, 11:47pm</div>
-                  <div className="frag f4"><b>TPA reference</b>nobody wrote down</div>
-                  <div className="frag f5"><b>Family group chat</b>five people, no answer</div>
+              {/* Center Field */}
+              <div className="field relative min-h-[430px] flex items-center justify-center lg:pl-[clamp(0px,7.6vw,112px)] max-lg:min-h-[352px] max-lg:pl-0 max-sm:min-h-[392px]">
+                {/* Floating fragment cards for Stage 0 */}
+                <div className="frags absolute inset-[-4%_-44%_-4%_-10%] pointer-events-none max-lg:inset-0 max-sm:block" aria-hidden="true">
+                  <div className="frag f1">
+                    <b>Hospital admission desk</b>asks for the policy
+                  </div>
+                  <div className="frag f2">
+                    <b>Policy PDF</b>in an email from 2023
+                  </div>
+                  <div className="frag f3">
+                    <b>Insurer helpline</b>on hold, 11:47pm
+                  </div>
+                  <div className="frag f4">
+                    <b>TPA reference</b>nobody wrote down
+                  </div>
+                  <div className="frag f5">
+                    <b>Family group chat</b>five people, no answer
+                  </div>
                 </div>
 
-                {/* Case card */}
-                <div className="deskcard case w-full max-w-[560px] rounded-[14px] overflow-hidden">
-                  <div className="flex items-center justify-between gap-3 px-[18px] py-[14px] border-b border-[rgba(246,247,241,.13)] bg-[rgba(6,28,30,.45)] flex-wrap row-gap-2">
-                    <span className="font-mono text-[12.5px] tracking-[0.08em]">CASE &middot; 1FC-H-000412</span>
-                    <span className={`pill ${stage === 4 ? 'done' : 'pill-live'}`}>
+                {/* Case Card */}
+                <div id="deskCard" className="deskcard case w-full max-w-[560px] rounded-[14px] bg-[linear-gradient(180deg,rgba(18,73,75,.95),rgba(10,45,47,.95))] border border-[rgba(246,247,241,.24)] shadow-[0_30px_70px_-30px_rgba(0,0,0,.78)] overflow-hidden">
+                  <div className="case-top flex items-center justify-between gap-3.5 px-[22px] py-4 border-b border-[rgba(246,247,241,.13)] bg-[rgba(6,28,30,.45)]">
+                    <span id="deskId" className="case-id font-mono text-[12.5px] tracking-[0.08em]">CASE &middot; 1FC-H-000412</span>
+                    <span id="deskPill" className={`pill ${stage === 4 ? 'done' : 'pill-live'}`}>
                       <span className="dot" />
-                      {STAGE_TITLES[stage]}
+                      <span id="deskPillTxt">{STATES[stage]}</span>
                     </span>
                   </div>
-                  <div className="case-body px-[18px] py-[6px_16px] max-sm:py-1.5">
-                    {CASE_ROWS.map(({ at, time, title, sub }) => {
-                      const isNow = at === stage
-                      const isDone = stage >= at
+
+                  <div className="case-body px-[22px] py-3 max-sm:px-4 max-sm:py-1.5">
+                    {CASE_ROWS.map(({ from, time, title, sub }) => {
+                      const isOn = stage >= from
+                      const isCurrentActive = stage === from
                       return (
-                        <div key={time} className={`crow drow ${isDone ? 'done on' : ''} ${isNow && !isDone ? 'now on' : ''}`}>
+                        <div
+                          key={title}
+                          data-from={from}
+                          className={`crow drow ${isOn ? 'on' : ''} ${stage === 4 || !isCurrentActive ? 'done' : 'now'}`}
+                        >
                           <span className="t">{time}</span>
                           <span className="m"><i /></span>
                           <span className="c">
                             <strong>{title}</strong>
-                            <span className="max-sm:hidden">{sub}</span>
+                            <span>{sub}</span>
                           </span>
                         </div>
                       )
                     })}
                   </div>
-                  <div className="case-foot flex items-center gap-3 px-[18px] py-[14px] border-t border-[rgba(246,247,241,.13)] bg-[rgba(6,28,30,.35)] font-mono text-[10.5px] tracking-[.06em] uppercase text-[#9DB4AC] flex-wrap">
-                    <span className="owner flex items-center gap-2 text-[#F6F7F1] normal-case tracking-normal font-sans text-[13px]">
-                      <span className="avatar w-6 h-6 rounded-full bg-[#E0A139] text-[#20160a] grid place-items-center text-[10.5px] font-bold font-sans">RK</span>
-                      {STAGE_OWNERS[stage]}
+
+                  <div className="case-foot flex items-center gap-3.5 px-[22px] py-[15px] border-t border-[rgba(246,247,241,.13)] bg-[rgba(6,28,30,.35)] font-mono text-[10.5px] tracking-[.07em] uppercase text-[#9DB4AC] flex-wrap">
+                    <span className="owner flex items-center gap-[9px] text-[#F6F7F1] normal-case tracking-normal font-sans text-[13.5px]">
+                      <span className="avatar w-[26px] h-[26px] rounded-full bg-[#E0A139] text-[#20160a] grid place-items-center text-[10.5px] font-bold font-sans">RK</span>
+                      <span id="deskOwner">{OWNERS[stage]}</span>
                     </span>
                   </div>
                 </div>
 
-                {/* Mascot */}
-                <span className={`mascot mascot-desk absolute left-0 bottom-[-4px] h-[190px] pointer-events-none z-[3] transition-opacity duration-[0.6s] transition-transform duration-[0.6s] max-sm:hidden ${stage >= 1 ? 'on' : ''}`} id="mascotDesk">
-                  <MascotIllustration variant="desk" className="h-[240px] sm:h-[280px]" />
+                {/* Mascot Desk */}
+                <span
+                  id="mascotDesk"
+                  className={`mascot mascot-desk absolute left-0 bottom-[-4px] pointer-events-none z-[3] ${stage >= 1 ? 'on' : ''}`}
+                  aria-hidden="true"
+                >
+                  <MascotIllustration variant="desk" className="h-[220px] sm:h-[260px]" />
                 </span>
-              </div>
-
-              {/* Right panel */}
-              <div className="panel flex flex-col gap-3 max-sm:hidden">
-                {PANEL_NODES.map(({ at, key, label, val, sub, bar }) => (
-                  <div key={label} className={`pnode ${key} ${stage >= at ? 'on' : ''}`}>
-                    <div className="pk">{label}</div>
-                    <div className="pv">{val}<small>{sub}</small></div>
-                    {bar && <div className="docbar"><i style={{ width: stage >= 2 ? '100%' : '0%', transitionDuration: '1.4s' }} /></div>}
-                  </div>
-                ))}
               </div>
             </div>
           </div>

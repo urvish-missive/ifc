@@ -23,9 +23,10 @@ export default function Footer() {
               Product
             </h3>
             <ul className="mt-5 flex flex-col gap-3.5">
-              <li><a href="#desk" className="text-[15px] text-[#CBD8CE] transition-colors hover:text-[#F6F7F1]">The case desk</a></li>
-              <li><a href="#service" className="text-[15px] text-[#CBD8CE] transition-colors hover:text-[#F6F7F1]">What you get</a></li>
-              <li><a href="#reality" className="text-[15px] text-[#CBD8CE] transition-colors hover:text-[#F6F7F1]">The reality</a></li>
+              <li><a href="#cover" className="text-[15px] text-[#CBD8CE] transition-colors hover:text-[#F6F7F1]">Insurance</a></li>
+              <li><a href="#claims" className="text-[15px] text-[#CBD8CE] transition-colors hover:text-[#F6F7F1]">Claims &amp; case desk</a></li>
+              <li><a href="#journey" className="text-[15px] text-[#CBD8CE] transition-colors hover:text-[#F6F7F1]">How it works</a></li>
+              <li><a href="#trust" className="text-[15px] text-[#CBD8CE] transition-colors hover:text-[#F6F7F1]">Why 1FC Insure</a></li>
               <li><a href="#faq" className="text-[15px] text-[#CBD8CE] transition-colors hover:text-[#F6F7F1]">Questions</a></li>
             </ul>
           </div>

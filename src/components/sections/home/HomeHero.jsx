@@ -1,86 +1,142 @@
+import { useEffect, useRef } from 'react'
 import MascotIllustration from '../../ui/MascotIllustration'
 
 const HERO_CARD_ROWS = [
-  { time: '23:41', cls: 'done', title: 'Assistance requested', sub: 'Raised by a family member at the admission desk.' },
-  { time: '23:44', cls: 'done', title: 'Case opened, owner assigned', sub: 'Routed to the health claims desk.' },
-  { time: '23:52', cls: 'now', title: 'Hospital coordination underway', sub: 'Admission desk contacted, checklist issued to the family.' },
+  { time: '23:41', cls: 'done', title: 'You told us something happened', sub: 'Raised by a family member at the admission desk.' },
+  { time: '23:44', cls: 'done', title: 'Someone took it on', sub: 'A named coordinator now owns this from end to end.' },
+  { time: '23:52', cls: 'now', title: 'We are talking to the hospital', sub: 'Papers listed, coordination underway. You do not have to chase it.' },
 ]
 
-const HERO_META_TAGS = ['Health, life and general', 'Broking and POSP', 'Hospital coordination']
-
 export default function HomeHero() {
-  return (
-    <section id="top" className="relative overflow-hidden pt-[clamp(48px,7vw,84px)] pb-[clamp(28px,4vw,56px)] max-sm:pt-[92px]">
-      {/* Radial glow behind hero */}
-      <div className="absolute inset-0 pointer-events-none -z-10" style={{ inset: '-30% -10% auto -10%', height: '130%', background: 'radial-gradient(58% 55% at 20% 6%, rgba(27,93,92,.55), transparent 70%), radial-gradient(42% 42% at 94% 4%, rgba(224,161,57,.1), transparent 70%)' }} />
+  const mascotRef = useRef(null)
 
-      <div className="max-w-[var(--maxw)] mx-auto px-[var(--pad)] relative grid grid-cols-1 lg:grid-cols-[1fr_1.06fr] items-center gap-9 lg:gap-[clamp(24px,2.6vw,40px)]">
-        {/* Left column */}
+  useEffect(() => {
+    let raf = null
+    const handleMouseMove = (ev) => {
+      if (!mascotRef.current || window.innerWidth < 1041) return
+      const x = (ev.clientX / window.innerWidth - 0.5) * 11
+      const y = (ev.clientY / window.innerHeight - 0.5) * 6
+      if (!raf) {
+        raf = requestAnimationFrame(() => {
+          if (mascotRef.current) {
+            mascotRef.current.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`
+          }
+          raf = null
+        })
+      }
+    }
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  return (
+    <section id="top" className="relative overflow-hidden pt-[clamp(48px,5.8vw,78px)] pb-[clamp(40px,4.4vw,62px)]">
+      {/* Radial ambient background */}
+      <div
+        className="absolute pointer-events-none -z-10"
+        style={{
+          inset: '-30% -10% auto -10%',
+          height: '130%',
+          background:
+            'radial-gradient(56% 54% at 18% 4%, rgba(18, 73, 75, .6), transparent 70%), radial-gradient(40% 40% at 95% 2%, rgba(224, 161, 57, .09), transparent 70%)',
+        }}
+      />
+
+      <div className="max-w-[var(--maxw)] mx-auto px-[var(--pad)] relative grid grid-cols-1 lg:grid-cols-[1fr_1.04fr] items-center gap-[clamp(28px,3.2vw,52px)]">
+        {/* Left Column */}
         <div>
           <span className="inline-flex items-center gap-3 font-mono text-[11px] tracking-[.19em] uppercase text-[#7A948D] rv">
             <span className="w-[26px] h-px bg-[#E0A139] flex-none" />
-            Insurance broking with a case desk
+            Suraksha hi nahi, sache saath ka vaada
           </span>
-          <h1 className="mt-[22px] text-[clamp(33px,4.2vw,56px)] font-display font-semibold tracking-[-0.02em] leading-[1.05] text-[#F6F7F1] rv">
-            Buying the policy<br />
-            is the <span className="text-[#E0A139]">easy half.</span>
+          <h1 className="mt-6 text-[clamp(33px,4.2vw,56px)] font-display font-bold tracking-[-0.032em] leading-[1.04] text-[#F6F7F1] rv">
+            Insurance that stays with you<br />
+            <span className="text-[#E0A139]">beyond the policy.</span>
           </h1>
-          <p className="mt-[22px] text-[clamp(16px,1.42vw,18.5px)] leading-[1.62] text-[#CBD8CE] max-w-[50ch] rv">
-            1FC Insure exists for the other half. The 11pm admission, the document list nobody warned you about, the claim that has to be chased, the renewal that arrives as a cold call. One relationship. One case number. One team that answers.
+          <p className="mt-6 text-[clamp(16px,1.42vw,18.5px)] leading-[1.62] text-[#CBD8CE] max-w-[48ch] rv">
+            You can buy insurance almost anywhere. With 1FC Insure you also get someone who stays involved after it is bought: when a claim starts, when the hospital wants papers, when nobody will tell you what happens next.
           </p>
-          <div className="flex gap-3 mt-8 flex-wrap rv">
-            <a href="#access" className="inline-flex items-center gap-2 rounded-[9px] bg-[#E0A139] px-6 py-[15px] text-[15px] font-semibold text-[#20160A] border border-transparent transition hover:-translate-y-0.5 hover:bg-[#EDB253]">
-              Request early access &rarr;
+
+          <div className="flex gap-3 mt-[34px] flex-wrap rv">
+            <a
+              href="#access"
+              className="inline-flex items-center gap-[9px] text-[15px] font-semibold px-6 py-[15px] rounded-[9px] bg-[#E0A139] text-[#20160A] border border-[#E0A139] transition hover:-translate-y-0.5 hover:bg-[#EDB253]"
+            >
+              Start with 1FC Insure &rarr;
             </a>
-            <a href="#desk" className="inline-flex items-center gap-2 rounded-[9px] bg-transparent px-6 py-[15px] text-[15px] font-semibold text-[#F6F7F1] border border-[rgba(246,247,241,.24)] transition hover:-translate-y-0.5 hover:border-[#F6F7F1]">
-              Watch a case open
+            <a
+              href="#claims"
+              className="inline-flex items-center gap-[9px] text-[15px] font-semibold px-6 py-[15px] rounded-[9px] bg-transparent text-[#F6F7F1] border border-[rgba(246,247,241,.24)] transition hover:-translate-y-0.5 hover:border-[#F6F7F1]"
+            >
+              See what happens when you claim
             </a>
           </div>
-          <div className="mt-8 pt-[18px] border-t border-[rgba(246,247,241,.13)] flex flex-wrap gap-5 font-mono text-[11px] tracking-[.06em] uppercase text-[#7A948D] rv">
-            {HERO_META_TAGS.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
+
+          {/* Contrast tracks: Usually vs With 1FC Insure */}
+          <div className="contrast rv">
+            <div className="track">
+              <span className="tk">Usually</span>
+              <span className="tv">Buy a policy. Receive a PDF. Work the rest out yourself.</span>
+            </div>
+            <div className="track now">
+              <span className="tk">With 1FC Insure</span>
+              <span className="tv">Get covered. Something happens. <b>Someone is already with you.</b></span>
+            </div>
           </div>
         </div>
 
-        {/* Right column — case card + mascot */}
-        <div className="relative lg:pl-[clamp(0px,8.6vw,126px)]">
-          <div className="relative z-10 rounded-[14px] bg-[linear-gradient(180deg,rgba(18,73,75,.95),rgba(10,45,47,.95))] border border-[rgba(246,247,241,.24)] shadow-[0_30px_70px_-30px_rgba(0,0,0,.78)] overflow-hidden">
-            {/* Card header */}
-            <div className="flex items-center justify-between gap-3 px-[18px] py-[14px] border-b border-[rgba(246,247,241,.13)] bg-[rgba(6,28,30,.45)]">
-              <span className="font-mono text-[12.5px] tracking-[0.08em]">CASE &middot; 1FC-H-000412</span>
-              <span className="inline-flex items-center gap-1.5 font-mono text-[10.5px] tracking-[.12em] uppercase px-[9px] py-1 rounded-full border border-[rgba(224,161,57,.45)] text-[#E0A139] bg-[rgba(224,161,57,.09)]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E0A139] animate-[pulse_2.2s_infinite]" />
-                In progress
+        {/* Right Column: Case Card + Mascot */}
+        <div className="relative lg:pl-[clamp(0px,8.4vw,124px)] max-sm:pt-[172px]">
+          <div className="case relative z-10 rounded-[14px] bg-[linear-gradient(180deg,rgba(18,73,75,.95),rgba(10,45,47,.95))] border border-[rgba(246,247,241,.24)] shadow-[0_30px_70px_-30px_rgba(0,0,0,.78)] overflow-hidden rv">
+            {/* Card Top */}
+            <div className="case-top flex items-center justify-between gap-3.5 px-[22px] py-4 border-b border-[rgba(246,247,241,.13)] bg-[rgba(6,28,30,.45)]">
+              <span className="case-id font-mono text-[12.5px] tracking-[0.08em]">CASE &middot; 1FC-H-000412</span>
+              <span className="pill pill-live font-mono text-[10.5px] tracking-[.13em] uppercase px-[11px] py-[5px] rounded-full border border-[rgba(224,161,57,.45)] text-[#E0A139] bg-[rgba(224,161,57,.09)] inline-flex items-center gap-[7px]">
+                <span className="dot w-1.5 h-1.5 rounded-full bg-[#E0A139] animate-[pulse_2.2s_infinite]" />
+                With you
               </span>
             </div>
 
-            {/* Card rows */}
-            <div className="px-[18px] py-[18px]">
+            {/* Card Body */}
+            <div className="case-body px-[22px] py-3">
               {HERO_CARD_ROWS.map(({ time, cls, title, sub }) => (
-                <div key={time} className="grid grid-cols-[78px_20px_1fr] gap-3 items-start py-[11px] border-b border-dashed border-[rgba(246,247,241,.09)] last:border-0">
-                  <span className="font-mono text-[11.5px] text-[#7A948D] pt-0.5">{time}</span>
-                  <span className="flex justify-center pt-1.5">
-                    <span className={`w-[9px] h-[9px] rounded-full border-[1.5px] border-[#7A948D] transition-all duration-[400ms] ${cls === 'done' ? 'bg-[#7FC49A] border-[#7FC49A]' : cls === 'now' ? 'bg-[#E0A139] border-[#E0A139] shadow-[0_0_0_4px_rgba(224,161,57,.16)]' : ''}`} />
+                <div
+                  key={title}
+                  className={`crow ${cls} grid grid-cols-[82px_22px_1fr] max-sm:grid-cols-[58px_18px_1fr] gap-4 max-sm:gap-2.5 items-start py-[13px] border-b border-dashed border-[rgba(246,247,241,.09)] last:border-0`}
+                >
+                  <span className="t font-mono text-[11.5px] max-sm:text-[10.5px] text-[#7A948D] pt-0.5">{time}</span>
+                  <span className="m flex justify-center pt-1.5">
+                    <i className={`w-[9px] h-[9px] rounded-full border-[1.5px] border-[#7A948D] transition-all duration-400 ${cls === 'done' ? 'bg-[#7FC49A] border-[#7FC49A]' : cls === 'now' ? 'bg-[#E0A139] border-[#E0A139] shadow-[0_0_0_4px_rgba(224,161,57,.16)]' : ''}`} />
                   </span>
-                  <span>
+                  <span className="c">
                     <strong className="block text-[14.5px] font-semibold">{title}</strong>
-                    <span className="block text-[13px] text-[#9DB4AC] leading-[1.45]">{sub}</span>
+                    <span className="block text-[13px] text-[#9DB4AC] leading-[1.5] mt-0.5">{sub}</span>
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* Card footer */}
-            <div className="flex items-center gap-3 px-[18px] py-[14px] border-t border-[rgba(246,247,241,.13)] bg-[rgba(6,28,30,.35)] font-mono text-[10.5px] tracking-[.06em] uppercase text-[#9DB4AC]">
-              <span className="w-6 h-6 rounded-full bg-[#E0A139] grid place-items-center font-sans text-[10.5px] font-bold text-[#20160a]">RK</span>
-              Owned by a named coordinator
+            {/* Card Foot */}
+            <div className="case-foot flex items-center gap-3.5 px-[22px] py-[15px] border-t border-[rgba(246,247,241,.13)] bg-[rgba(6,28,30,.35)] font-mono text-[10.5px] tracking-[.07em] uppercase text-[#9DB4AC] flex-wrap">
+              <span className="owner flex items-center gap-[9px] text-[#F6F7F1] normal-case tracking-normal font-sans text-[13.5px]">
+                <span className="avatar w-[26px] h-[26px] rounded-full bg-[#E0A139] text-[#20160a] grid place-items-center text-[10.5px] font-bold font-sans">RK</span>
+                Your coordinator, on this until it closes
+              </span>
             </div>
           </div>
 
-          {/* Floating mascot */}
-          <span className="mascot-hero absolute bottom-[-10px] left-[-20px] h-[clamp(206px,21vw,300px)] pointer-events-none z-20 hidden lg:block animate-[float_6s_ease-in-out_infinite]">
-            <MascotIllustration variant="hero" className="h-full w-auto drop-shadow-[0_24px_30px_rgba(0,0,0,.45)]" />
+          {/* Hero Mascot */}
+          <span
+            ref={mascotRef}
+            id="mascotHero"
+            className="mascot mascot-hero absolute left-[-20px] bottom-[-8px] h-[clamp(202px,20vw,292px)] pointer-events-none z-[3] max-sm:h-[194px] max-sm:top-0 max-sm:bottom-auto max-sm:left-0"
+            aria-hidden="true"
+          >
+            <MascotIllustration id="mascotHeroImg" variant="hero" className="h-full w-auto drop-shadow-[0_24px_30px_rgba(0,0,0,.45)]" />
           </span>
         </div>
       </div>
