@@ -87,9 +87,9 @@ export default function HiwPartiesSection({ onSelectParty }) {
   const d = PARTIES[selected]
 
   return (
-    <section className="parties bg-[var(--paper)] pb-[clamp(56px,6.4vw,84px)]" id="parties">
-      <div className="parties-in max-w-[1180px] mx-auto px-[var(--pad)]">
-        <span className="kicker block font-mono text-[11px] tracking-[.22em] uppercase text-[var(--ink-3)] my-4">
+    <section className="parties bg-[var(--paper)] pt-[clamp(48px,6vw,84px)] max-md:pt-10 pb-[clamp(56px,6.4vw,84px)]" id="parties">
+      <div className="parties-in max-w-[1180px] mx-auto px-4 md:px-[var(--pad)]">
+        <span className="kicker block font-mono text-[11px] tracking-[.22em] uppercase text-[var(--ink-3)] mb-2.5 mt-0">
           Who does what
         </span>
 
@@ -98,8 +98,8 @@ export default function HiwPartiesSection({ onSelectParty }) {
         </h2>
 
         <div className="pgrid grid grid-cols-1 md:grid-cols-[300px_1fr] gap-[clamp(24px,3.4vw,56px)] mt-[clamp(26px,3.2vw,40px)] items-start">
-          {/* Tabs */}
-          <div className="plist flex flex-col md:flex-col gap-2 max-md:flex-row max-md:flex-wrap">
+          {/* Tabs — 4-col horizontal on ALL screens */}
+          <div className="plist grid grid-cols-4 md:grid-cols-1 gap-1 md:gap-2">
             {Object.keys(PARTIES).map((key) => {
               const p = PARTIES[key]
               const isCurrent = selected === key
@@ -109,15 +109,15 @@ export default function HiwPartiesSection({ onSelectParty }) {
                   type="button"
                   aria-pressed={isCurrent}
                   onClick={() => handlePick(key)}
-                  className={`ptab text-left rounded-[11px] p-[14px_18px] max-md:p-[11px_15px] max-md:flex-1 cursor-pointer transition-all ${isCurrent
+                  className={`ptab text-left rounded-[8px] md:rounded-[11px] p-[7px_4px] md:p-[14px_18px] min-w-0 cursor-pointer transition-all ${isCurrent
                     ? 'bg-[var(--ink)] border border-[var(--ink)] text-[var(--cream)]'
                     : 'bg-transparent border border-[var(--line-l2)] hover:border-[var(--ink)]'
                     }`}
                 >
-                  <span className={`pn block font-display font-bold text-xs sm:text-[14px] md:text-[16px] tracking-[-.02em] ${isCurrent ? 'text-[var(--cream)]' : 'text-[var(--ink)]'}`}>
+                  <span className={`pn block font-display font-bold text-[9px] md:text-[16px] tracking-[-.02em] leading-tight truncate ${isCurrent ? 'text-[var(--cream)]' : 'text-[var(--ink)]'}`}>
                     {p.name}
                   </span>
-                  <span className={`pr block font-mono text-[9.5px] tracking-[.14em] uppercase mt-1 max-md:hidden ${isCurrent ? 'text-[var(--amber)]' : 'text-[var(--ink-3)]'}`}>
+                  <span className={`pr block font-mono text-[6px] md:text-[9.5px] tracking-[.08em] md:tracking-[.14em] uppercase mt-px md:mt-1 leading-tight ${isCurrent ? 'text-[var(--amber)]' : 'text-[var(--ink-3)]'}`}>
                     {p.role}
                   </span>
                 </button>
