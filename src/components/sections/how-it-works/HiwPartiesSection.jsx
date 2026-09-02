@@ -87,9 +87,9 @@ export default function HiwPartiesSection({ onSelectParty }) {
   const d = PARTIES[selected]
 
   return (
-    <section className="parties bg-[var(--paper)] pt-4 max-md:pt-2 pb-[clamp(56px,6.4vw,84px)] px-4 md:px-[var(--pad)]" id="parties">
-      <div className="parties-in max-w-[1180px] mx-auto w-full">
-        <span className="kicker block font-mono text-[11px] tracking-[.22em] uppercase text-[var(--ink-3)] mb-2 mt-0">
+    <section className="bg-[var(--paper)] pt-[clamp(48px,6vw,84px)] max-md:pt-10 pb-[clamp(56px,6.4vw,84px)] px-[var(--pad)]" id="parties">
+      <div className="max-w-[var(--maxw)] mx-auto w-full">
+        <span className="block font-mono text-[11px] tracking-[.22em] uppercase text-[var(--ink-3)] mb-4 mt-0">
           Who does what
         </span>
 
@@ -97,9 +97,9 @@ export default function HiwPartiesSection({ onSelectParty }) {
           Four parties. Only one of them is usually left doing the coordinating.
         </h2>
 
-        <div className="pgrid grid grid-cols-1 md:grid-cols-[300px_1fr] gap-[clamp(20px,3vw,56px)] mt-[clamp(20px,2.8vw,40px)] items-start">
-          {/* Tabs — 4 columns in 1 row on mobile screen, 1 column on desktop */}
-          <div className="plist grid grid-cols-4 md:grid-cols-1 gap-1.5 md:gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-[clamp(20px,3vw,56px)] mt-[clamp(20px,2.8vw,40px)] items-start">
+          {/* Tabs — 4 columns on mobile, 1 column on desktop */}
+          <div className="grid grid-cols-4 md:grid-cols-1 gap-1.5 md:gap-2">
             {Object.keys(PARTIES).map((key) => {
               const p = PARTIES[key]
               const isCurrent = selected === key
@@ -109,16 +109,16 @@ export default function HiwPartiesSection({ onSelectParty }) {
                   type="button"
                   aria-pressed={isCurrent}
                   onClick={() => handlePick(key)}
-                  className={`ptab text-center md:text-left rounded-[9px] md:rounded-[11px] py-2.5 px-1 sm:px-2 md:p-[14px_18px] min-w-0 cursor-pointer transition-all flex flex-col justify-center items-center md:items-start ${
+                  className={`text-center md:text-left rounded-[9px] md:rounded-[11px] py-2.5 px-1 sm:px-2 md:p-[14px_18px] min-w-0 cursor-pointer transition-all duration-200 flex flex-col justify-center items-center md:items-start ${
                     isCurrent
                       ? 'bg-[var(--ink)] border border-[var(--ink)] text-[var(--cream)] shadow-sm'
                       : 'bg-transparent border border-[var(--line-l2)] hover:border-[var(--ink)] text-[var(--ink)]'
                   }`}
                 >
-                  <span className={`pn block font-display font-bold text-[12px] sm:text-[13.5px] md:text-[16px] tracking-[-.02em] leading-tight ${isCurrent ? 'text-[var(--cream)]' : 'text-[var(--ink)]'}`}>
+                  <span className={`block font-display font-bold text-[12px] sm:text-[13.5px] md:text-[16px] tracking-[-.02em] leading-tight ${isCurrent ? 'text-[var(--cream)]' : 'text-[var(--ink)]'}`}>
                     {p.name}
                   </span>
-                  <span className={`pr hidden md:block font-mono text-[9.5px] tracking-[.14em] uppercase mt-1 leading-tight ${isCurrent ? 'text-[var(--amber)]' : 'text-[var(--ink-3)]'}`}>
+                  <span className={`hidden md:block font-mono text-[9.5px] tracking-[.14em] uppercase mt-1 leading-tight ${isCurrent ? 'text-[var(--amber)]' : 'text-[var(--ink-3)]'}`}>
                     {p.role}
                   </span>
                 </button>
@@ -127,15 +127,15 @@ export default function HiwPartiesSection({ onSelectParty }) {
           </div>
 
           {/* Panel */}
-          <div className={`ppanel border-l border-[var(--line-l2)] pl-[clamp(24px,3vw,44px)] min-h-[210px] max-md:border-l-0 max-md:border-t max-md:pl-0 max-md:pt-5 max-md:min-h-0 transition-opacity duration-200 ${isFading ? 'opacity-0' : 'opacity-100'}`}>
-            <div className="ph font-display font-bold text-[clamp(19px,2.1vw,25px)] tracking-[-.026em] text-[var(--ink)]">
+          <div className={`border-l border-[var(--line-l2)] pl-[clamp(24px,3vw,44px)] min-h-[210px] max-md:border-l-0 max-md:border-t max-md:pl-0 max-md:pt-5 max-md:min-h-0 transition-opacity duration-200 ${isFading ? 'opacity-0' : 'opacity-100'}`}>
+            <div className="font-display font-bold text-[clamp(19px,2.1vw,25px)] tracking-[-.026em] text-[var(--ink)]">
               {d.h}
             </div>
-            <p className="pb text-[15.4px] text-[var(--ink-2)] leading-[1.6] mt-3 max-w-[60ch]">
+            <p className="text-[15.4px] text-[var(--ink-2)] leading-[1.6] mt-3 max-w-[60ch]">
               {d.b}
             </p>
 
-            <div className="pdoes mt-5 grid grid-cols-1 sm:grid-cols-2 gap-[clamp(18px,2.4vw,36px)]">
+            <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-[clamp(18px,2.4vw,36px)]">
               <div>
                 <h4 className="font-mono text-[9.5px] tracking-[.16em] uppercase text-[var(--ink-3)] mb-2 font-semibold">
                   Responsible for
@@ -148,7 +148,7 @@ export default function HiwPartiesSection({ onSelectParty }) {
                   ))}
                 </ul>
               </div>
-              <div className="no">
+              <div>
                 <h4 className="font-mono text-[9.5px] tracking-[.16em] uppercase text-[var(--ink-3)] mb-2 font-semibold">
                   Not responsible for
                 </h4>

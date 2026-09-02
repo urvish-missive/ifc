@@ -172,7 +172,7 @@ export default function HiwJourneySection({ activeParty }) {
   const current = STEPS[step]
 
   return (
-    <section className="exhibit bg-[var(--paper)]" id="journey">
+    <section className="exhibit bg-[var(--paper)] pt-[clamp(30px,4vw,60px)] max-md:pt-6" id="journey">
       <div
         ref={trackRef}
         id="jtrack"
@@ -180,11 +180,11 @@ export default function HiwJourneySection({ activeParty }) {
         data-done={step > 0 ? '1' : '0'}
       >
         <div className="jsticky sticky top-[var(--navh)] h-[calc(100vh-var(--navh))] min-h-[580px] max-md:min-h-0 flex items-center justify-center overflow-hidden">
-          <div className="jsticky-in w-full max-w-[1180px] mx-auto px-[var(--pad)] max-md:px-3">
+          <div className="jsticky-in w-full mx-auto px-[var(--pad)]">
             
             {/* The Stage */}
             <div
-              className={`jstg relative w-full max-w-[1000px] mx-auto h-[clamp(348px,30vw,430px)] max-md:h-[clamp(310px,46vh,370px)] bg-[#E4E9DC] border border-[var(--line-l2)] rounded-[18px] max-md:rounded-[14px] overflow-hidden ${
+              className={`jstg relative w-full h-[clamp(348px,30vw,430px)] max-md:h-[clamp(310px,46vh,370px)] bg-[#E4E9DC] border border-[var(--line-l2)] rounded-[18px] max-md:rounded-[14px] overflow-hidden ${
                 activeParty ? 'focus' : ''
               }`}
               id="stage"

@@ -11,8 +11,8 @@ export default function HowItWorks() {
   useEffect(() => {
     // Trigger hero reveal
     const timer = setTimeout(() => {
-      const openEl = document.getElementById('openIn')
-      if (openEl) openEl.classList.add('ready')
+      const sectionEl = document.getElementById('top')
+      if (sectionEl) sectionEl.classList.add('ready')
     }, 120)
 
     // Scroll to top on page load unless hash present

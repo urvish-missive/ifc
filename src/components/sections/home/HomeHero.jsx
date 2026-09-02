@@ -46,7 +46,7 @@ export default function HomeHero() {
         }}
       />
 
-      <div className="max-w-[var(--maxw)] mx-auto px-[var(--pad)] relative grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] items-center gap-[clamp(28px,3.2vw,52px)]">
+      <div className="mx-auto px-[var(--pad)] relative grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] items-center gap-[clamp(28px,3.2vw,52px)]">
         {/* Left Column */}
         <div>
           <span className="inline-flex items-center gap-3 font-mono text-[11px] tracking-[.19em] uppercase text-[#7A948D] rv">

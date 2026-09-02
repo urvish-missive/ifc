@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(246,247,241,.13)] bg-[#061C1E]">
-      <nav className="mx-auto flex h-[70px] w-full max-w-[var(--maxw)] items-center justify-between px-[var(--pad)]">
+      <nav className="mx-auto flex h-[70px] w-full items-center justify-between px-[var(--pad)]">
         {/* Brand Logo */}
         <Link
           to="/"
