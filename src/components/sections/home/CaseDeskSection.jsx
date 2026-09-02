@@ -69,7 +69,7 @@ export default function CaseDeskSection() {
           <div className="desk-inner w-full max-w-[var(--maxw)] mx-auto px-[var(--pad)]">
             {/* Header */}
             <div className="desk-head flex justify-between items-end gap-6 flex-wrap mb-[clamp(20px,2.6vw,34px)] max-lg:items-start max-lg:mb-[18px]">
-              <div>
+              <div className='pt-5 sm:pt-10 md:pt-20'>
                 <span className="label font-mono text-[11px] tracking-[.19em] uppercase text-[#7A948D] inline-flex items-center gap-3">
                   <span className="w-[26px] h-px bg-[#E0A139] flex-none" />
                   When you need to claim
