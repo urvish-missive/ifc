@@ -6,9 +6,13 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
           {/* Brand column */}
           <div className="max-w-xs">
-            <span className="font-display text-[1.6rem] font-bold tracking-tight text-[#F6F7F1]">
-              1FC <span className="font-normal">Insure</span>
-            </span>
+            <a href="/#top" aria-label="1FC Insure home" className="inline-block transition-opacity hover:opacity-90">
+              <img
+                src="/brand/1fc-logo-wordmark.png"
+                alt="1FC Insure"
+                className="h-[32px] max-md:h-[26px] w-auto block object-contain"
+              />
+            </a>
             <p className="mt-5 text-[15px] leading-relaxed text-[#CBD8CE]">
               An insurance broking and customer assistance service. We place the policy, then stay on the file through hospitalisation, claims and renewal.
             </p>

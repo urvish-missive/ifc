@@ -23,15 +23,17 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(246,247,241,.13)] bg-[#061C1E]">
       <nav className="mx-auto flex h-[70px] w-full max-w-[var(--maxw)] items-center justify-between px-[var(--pad)]">
-        {/* Brand */}
+        {/* Brand Logo */}
         <Link
           to="/"
-          aria-label="1FC Insure — home"
-          className="flex items-center gap-2.5"
+          aria-label="1FC Insure home"
+          className="brand flex items-center transition-opacity hover:opacity-90"
         >
-          <span className="font-display text-[1.4rem] font-bold tracking-tight text-[#F6F7F1]">
-            1FC <span className="font-normal">Insure</span>
-          </span>
+          <img
+            src="/brand/1fc-logo-wordmark.png"
+            alt="1FC Insure"
+            className="h-[28px] max-md:h-[24px] w-auto block object-contain"
+          />
         </Link>
 
         {/* Desktop nav links */}

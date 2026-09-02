@@ -32,7 +32,7 @@ export default function HiwClosingCta() {
           </Link>
         </div>
 
-        <p className="fineline mt-[clamp(24px,3vw,34px)] mx-auto max-w-[62ch] font-mono text-[11px] font-normal tracking-[.06em] text-[#7A948D] leading-[1.75] text-center">
+        <p className="fineline mt-[clamp(26px,3.2vw,36px)] mx-auto max-w-[58ch] font-sans text-[13.5px] sm:text-[14px] font-normal text-[#8EA59E] leading-[1.65] text-center tracking-normal">
           Coverage, approvals, exclusions and settlement are decided by the insurer and TPA under your policy terms. 1FC Insure advises, coordinates and follows up.
         </p>
       </div>

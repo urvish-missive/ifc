@@ -1316,14 +1316,14 @@ details[open] > summary::after { content: "-"; }
 
 /* Closing fineline disclaimer */
 .fineline {
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
   font-weight: 400;
-  letter-spacing: .06em;
-  color: var(--sage-dim);
-  line-height: 1.75;
-  max-width: 62ch;
-  margin: clamp(24px, 3vw, 34px) auto 0;
+  letter-spacing: normal;
+  color: #8EA59E;
+  line-height: 1.65;
+  max-width: 58ch;
+  margin: clamp(26px, 3.2vw, 36px) auto 0;
   text-align: center;
 }
 
