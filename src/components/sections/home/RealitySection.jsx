@@ -7,10 +7,10 @@ const STAT_SIGNALS = [
 ]
 
 const BAR_SEGMENTS = [
-  { key: 'paid', w: '71.29%', col: '#8FCBA6', label: '₹71.29 paid' },
-  { key: 'dis', w: '12.90%', col: '#EBBE72', label: '12.90' },
-  { key: 'rep', w: '9.34%', col: '#DC8C74', label: '9.34' },
-  { key: 'out', w: '6.48%', col: '#BFCBBE', label: '6.48' },
+  { key: 'paid', w: '60%', col: '#8FCBA6', label: '₹71.29 paid' },
+  { key: 'dis', w: '18%', col: '#EBBE72', label: '12.90' },
+  { key: 'rep', w: '12%', col: '#DC8C74', label: '9.34' },
+  { key: 'out', w: '10%', col: '#BFCBBE', label: '6.48' },
 ]
 
 const LEGEND_ITEMS = [
