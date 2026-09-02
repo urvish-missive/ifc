@@ -46,7 +46,7 @@ export default function HomeHero() {
         }}
       />
 
-      <div className="max-w-[var(--maxw)] mx-auto px-[var(--pad)] relative grid grid-cols-1 lg:grid-cols-[1fr_1.04fr] items-center gap-[clamp(28px,3.2vw,52px)]">
+      <div className="max-w-[var(--maxw)] mx-auto px-[var(--pad)] relative grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] items-center gap-[clamp(28px,3.2vw,52px)]">
         {/* Left Column */}
         <div>
           <span className="inline-flex items-center gap-3 font-mono text-[11px] tracking-[.19em] uppercase text-[#7A948D] rv">
@@ -76,21 +76,34 @@ export default function HomeHero() {
             </a>
           </div>
 
-          {/* Contrast tracks: Usually vs With 1FC Insure */}
-          <div className="contrast rv">
-            <div className="track">
-              <span className="tk">Usually</span>
-              <span className="tv">Buy a policy. Receive a PDF. Work the rest out yourself.</span>
+          {/* Contrast cards: Side-by-side with equal height on desktop */}
+          <div className="contrast-grid mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3.5 max-w-[580px] items-stretch rv">
+            <div className="flex flex-col justify-between p-4 rounded-[12px] border border-[rgba(246,247,241,.12)] bg-[rgba(6,28,30,.45)] shadow-sm">
+              <div>
+                <span className="font-mono text-[10px] tracking-[.18em] uppercase text-[#7A948D] block mb-2 font-medium">
+                  Usually
+                </span>
+                <p className="text-[14px] text-[#9DB4AC] leading-[1.5] m-0">
+                  Buy a policy. Receive a PDF. Work the rest out yourself.
+                </p>
+              </div>
             </div>
-            <div className="track now">
-              <span className="tk">With 1FC Insure</span>
-              <span className="tv">Get covered. Something happens. <b>Someone is already with you.</b></span>
+
+            <div className="flex flex-col justify-between p-4 rounded-[12px] border border-[rgba(224,161,57,.35)] bg-[linear-gradient(180deg,rgba(18,73,75,.5),rgba(10,45,47,.5))] shadow-[0_8px_20px_-10px_rgba(0,0,0,.5)]">
+              <div>
+                <span className="font-mono text-[10px] tracking-[.18em] uppercase text-[#E0A139] block mb-2 font-medium">
+                  With 1FC Insure
+                </span>
+                <p className="text-[14px] text-[#F6F7F1] leading-[1.5] m-0">
+                  Get covered. Something happens. <b className="text-[#E0A139] font-semibold">Someone is already with you.</b>
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Right Column: Case Card + Mascot */}
-        <div className="relative lg:pl-[clamp(0px,8.4vw,124px)] max-sm:pt-[172px]">
+        <div className="relative lg:pl-[clamp(0px,8.4vw,124px)] max-sm:pt-0 max-sm:mt-6">
           <div className="case relative z-10 rounded-[14px] bg-[linear-gradient(180deg,rgba(18,73,75,.95),rgba(10,45,47,.95))] border border-[rgba(246,247,241,.24)] shadow-[0_30px_70px_-30px_rgba(0,0,0,.78)] overflow-hidden rv">
             {/* Card Top */}
             <div className="case-top flex items-center justify-between gap-3.5 px-[22px] py-4 border-b border-[rgba(246,247,241,.13)] bg-[rgba(6,28,30,.45)]">
@@ -133,7 +146,7 @@ export default function HomeHero() {
           <span
             ref={mascotRef}
             id="mascotHero"
-            className="mascot mascot-hero absolute left-[-20px] bottom-[-8px] h-[clamp(202px,20vw,292px)] pointer-events-none z-[3] max-sm:h-[194px] max-sm:top-0 max-sm:bottom-auto max-sm:left-0"
+            className="mascot mascot-hero absolute left-[-20px] bottom-[-8px] h-[clamp(202px,20vw,292px)] pointer-events-none z-[3] max-sm:hidden"
             aria-hidden="true"
           >
             <MascotIllustration id="mascotHeroImg" variant="hero" className="h-full w-auto drop-shadow-[0_24px_30px_rgba(0,0,0,.45)]" />
