@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 export default function HiwClosingCta() {
   return (
     <section className="close-cta bg-[#0C3436] py-[clamp(60px,7vw,96px)] text-center px-[var(--pad)]" id="access">
-      <div className="close-in max-w-[840px] mx-auto">
+      <div className="close-in max-w-[840px] mx-auto w-full">
         <div className="kicker font-mono text-[11px] tracking-[.22em] uppercase text-[#7A948D]">
           Your turn
         </div>

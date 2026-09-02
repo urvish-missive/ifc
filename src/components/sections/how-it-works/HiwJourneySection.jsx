@@ -175,10 +175,11 @@ export default function HiwJourneySection({ activeParty }) {
     <section className="exhibit bg-[var(--paper)]" id="journey">
       <div
         ref={trackRef}
+        id="jtrack"
         className="jtrack relative h-[calc((100vh-var(--navh))+392vh)] max-md:h-[calc((100vh-var(--navh))+368vh)]"
         data-done={step > 0 ? '1' : '0'}
       >
-        <div className="jsticky sticky top-[var(--navh)] h-[calc(100vh-var(--navh))] min-h-[600px] max-md:min-h-0 max-md:pt-3 max-md:items-start flex items-center overflow-hidden">
+        <div className="jsticky sticky top-[var(--navh)] h-[calc(100vh-var(--navh))] min-h-[580px] max-md:min-h-0 flex items-center justify-center overflow-hidden">
           <div className="jsticky-in w-full max-w-[1180px] mx-auto px-[var(--pad)] max-md:px-3">
             
             {/* The Stage */}
@@ -274,7 +275,7 @@ export default function HiwJourneySection({ activeParty }) {
               </svg>
 
               {/* History ring (Step 10 / index 9) */}
-              <div className={`hist ${step >= 9 ? 'on' : ''}`} id="histRing" aria-hidden="true">
+              <div className={`hist ${step >= 9 ? 'on' : ''}`} aria-hidden="true">
                 <span>History kept</span>
               </div>
 
@@ -334,7 +335,7 @@ export default function HiwJourneySection({ activeParty }) {
               <span className={`jchip ch4 ${step === 1 ? 'on' : ''}`} style={{ '--d': '420ms' }}>What must be disclosed</span>
 
               {/* Handoff Queue (Step 7 / index 6) */}
-              <div className={`hq ${step === 6 ? 'on' : ''}`} id="handQ" aria-hidden="true">
+              <div className={`hq ${step === 6 ? 'on' : ''}`} aria-hidden="true">
                 <span className="hl">Usually</span>
                 <div className="hqrow">
                   <i className="anon" />
@@ -346,32 +347,32 @@ export default function HiwJourneySection({ activeParty }) {
               </div>
 
               {/* Coordinator Mascot & Owner Tag (Step 7+ / index 6+) */}
-              <span className={`coord ${step >= 6 ? 'on' : ''}`} id="coord" aria-hidden="true">
+              <span className={`coord ${step >= 6 ? 'on' : ''}`} aria-hidden="true">
                 <MascotIllustration variant="trust" className="h-full w-auto" />
               </span>
 
-              <div className={`otag ${step >= 6 ? 'on' : ''}`} id="oTag" aria-hidden="true">
+              <div className={`otag ${step >= 6 ? 'on' : ''}`} aria-hidden="true">
                 <span className="av">RK</span>
                 <span className="ot">Coordinator<b>Rakesh K.</b></span>
               </div>
             </div>
 
             {/* Console */}
-            <div className="console mt-[clamp(14px,1.8vw,22px)] max-md:mt-3">
+            <div className="console mt-[clamp(14px,1.8vw,22px)]">
               {/* Top: Step count & 10 ticks */}
-              <div className="ctop flex items-center gap-4 max-md:gap-2.5">
-                <div className="ccount font-mono text-[11px] max-md:text-[10px] tracking-[.16em] text-[var(--ink-3)] whitespace-nowrap flex-none">
+              <div className="ctop flex items-center gap-4">
+                <div className="ccount font-mono text-[11px] tracking-[.16em] text-[var(--ink-3)] whitespace-nowrap flex-none">
                   <b>{step + 1 < 10 ? `0${step + 1}` : step + 1}</b> / 10
                 </div>
 
-                <div className="ctrack grid grid-cols-10 gap-[5px] max-md:gap-[3px] flex-1">
+                <div className="ctrack grid grid-cols-10 gap-[5px] flex-1">
                   {STEPS.map((s, idx) => (
                     <button
                       key={s.t}
                       type="button"
                       aria-label={`Go to step ${idx + 1} of 10: ${s.t}`}
                       onClick={() => scrollToStep(idx)}
-                      className={`h-1.5 max-md:h-1 rounded-[2px] transition-all cursor-pointer ${
+                      className={`h-1.5 rounded-[2px] transition-all cursor-pointer ${
                         idx < step
                           ? 'seen bg-[#9BB29E]'
                           : idx === step
@@ -384,24 +385,24 @@ export default function HiwJourneySection({ activeParty }) {
               </div>
 
               {/* Title, Body, and Buttons */}
-              <div className="jrow grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-[clamp(16px,2.4vw,48px)] items-end mt-[clamp(12px,1.8vw,22px)] max-md:mt-2.5">
+              <div className="jrow grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-[clamp(16px,2.4vw,48px)] items-end mt-[clamp(12px,1.8vw,22px)]">
                 <div className="ctext">
-                  <h3 className={`text-[clamp(17px,2.2vw,28px)] max-md:text-[16px] font-display font-bold tracking-[-.028em] text-[var(--ink)] m-0 leading-[1.2] transition-opacity duration-200 ${isSwapping ? 'swap opacity-0' : 'opacity-100'}`}>
+                  <h3 className={`text-[clamp(19px,2.2vw,28px)] font-display font-bold tracking-[-.028em] text-[var(--ink)] m-0 leading-[1.2] transition-opacity duration-200 ${isSwapping ? 'swap opacity-0' : 'opacity-100'}`}>
                     {current.t}
                   </h3>
-                  <p className={`text-[15px] max-md:text-[13.5px] text-[var(--ink-2)] leading-[1.55] max-md:leading-[1.45] mt-2 max-md:mt-1 max-w-[58ch] min-h-[2.9em] max-md:min-h-0 transition-opacity duration-200 ${isSwapping ? 'swap opacity-0' : 'opacity-100'}`}>
+                  <p className={`text-[15px] text-[var(--ink-2)] leading-[1.55] mt-2 max-w-[58ch] min-h-[2.9em] transition-opacity duration-200 ${isSwapping ? 'swap opacity-0' : 'opacity-100'}`}>
                     {current.b}
                   </p>
                 </div>
 
-                <div className="cbtns flex items-center gap-2 max-md:w-full max-md:mt-2">
+                <div className="cbtns flex items-center gap-2 max-lg:w-full">
                   <button
                     type="button"
                     disabled={step === 0}
                     onClick={() => scrollToStep(step - 1)}
-                    className="btn-line bg-transparent border border-[var(--line-l2)] text-[var(--ink)] rounded-[9px] px-4 py-2.5 max-md:py-2 text-[14px] font-semibold cursor-pointer transition hover:border-[var(--ink)] disabled:opacity-35 disabled:cursor-default"
+                    className="btn-line bg-transparent border border-[var(--line-l2)] text-[var(--ink)] rounded-[9px] px-4 py-2.5 text-[14px] font-semibold cursor-pointer transition hover:border-[var(--ink)] disabled:opacity-35 disabled:cursor-default"
                   >
-                    &larr;
+                    Back
                   </button>
 
                   <button
@@ -414,7 +415,7 @@ export default function HiwJourneySection({ activeParty }) {
                         scrollToStep(step + 1)
                       }
                     }}
-                    className="btn-go flex-1 lg:flex-none inline-flex items-center justify-center bg-[var(--ink)] text-[var(--cream)] border border-[var(--ink)] rounded-[9px] px-5 py-2.5 max-md:py-2 text-[14.5px] max-md:text-[13.5px] font-semibold cursor-pointer whitespace-nowrap transition hover:bg-[#0F4143] hover:-translate-y-[2px]"
+                    className="btn-go flex-1 lg:flex-none inline-flex items-center justify-center bg-[var(--ink)] text-[var(--cream)] border border-[var(--ink)] rounded-[9px] px-5 py-2.5 text-[14.5px] font-semibold cursor-pointer whitespace-nowrap transition hover:bg-[#0F4143] hover:-translate-y-[2px]"
                   >
                     {step === N - 1 ? 'Start with 1FC Insure' : 'What happens next'}
                     <span className="arw ml-2 inline-block transition-transform duration-200">&rarr;</span>

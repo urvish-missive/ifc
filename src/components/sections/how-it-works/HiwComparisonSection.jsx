@@ -50,53 +50,49 @@ export default function HiwComparisonSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="never bg-[#061C1E] text-[#F6F7F1] py-[clamp(64px,7.5vw,104px)]" id="never">
-      <div className="never-in max-w-[var(--maxw)] mx-auto px-[var(--pad)]">
+    <section ref={sectionRef} className="never bg-[#061C1E] text-[#F6F7F1] py-[clamp(64px,7.5vw,104px)] px-[var(--pad)]" id="never">
+      <div className="never-in max-w-[var(--maxw)] mx-auto w-full">
         {/* Header */}
         <div className="nhead grid grid-cols-1 lg:grid-cols-[1.2fr_.8fr] gap-[clamp(28px,4vw,72px)] items-end">
           <div>
             <div className="kicker font-mono text-[11px] tracking-[.22em] uppercase text-[#7A948D]">
               The short version
             </div>
-            <h2 className="mt-4 text-[clamp(26px,3.2vw,42px)] font-display font-bold text-[#F6F7F1] max-w-[18ch] leading-[1.1]">
+            <h2 className="mt-4 text-[clamp(27px,3.3vw,43px)] font-display font-bold leading-[1.04] text-[#F6F7F1]">
               What insurance usually asks of you, and what it stops asking.
             </h2>
           </div>
-          <p className="nlede text-[clamp(15px,1.5vw,17.5px)] text-[#9DB4AC] leading-[1.6] max-w-[38ch] pb-1.5">
+          <p className="nlede text-[17px] text-[#CBD8CE] leading-[1.6]">
             Same claim, same hospital, same insurer. The only thing that changes is who does the work.
           </p>
         </div>
 
-        {/* Comparison grid */}
-        <div className={`cmp mt-[clamp(30px,3.6vw,46px)] ${isStruck ? 'struck' : ''}`} id="nlist">
+        {/* Comparison List */}
+        <div className={`cmp ${isStruck ? 'struck' : ''} mt-[clamp(30px,3.6vw,46px)]`} id="nlist">
+          {/* Header row */}
           <div className="ch a font-mono text-[10px] tracking-[.19em] uppercase text-[#7A948D] pb-3.5">
             How it usually goes
           </div>
-          <div className="ch b font-mono text-[10px] tracking-[.19em] uppercase text-[#E0A139] pb-3.5">
+          <div className="ch b font-mono text-[10px] tracking-[.19em] uppercase text-[var(--amber)] pb-3.5 pl-[clamp(26px,3.2vw,56px)] border-l border-[var(--line-d)]">
             With 1FC Insure
           </div>
 
-          {COMPARISON_ROWS.map(({ oldText, newText, delay }) => (
-            <div key={oldText} className="contents">
-              <div className="ca">
-                <span className="nold" style={{ '--d': delay }}>
-                  {oldText}
+          {/* Row mappings */}
+          {COMPARISON_ROWS.map((row) => (
+            <div key={row.oldText} className="contents">
+              <div className="ca border-t border-[var(--line-d)] py-[clamp(14px,1.6vw,19px)] pr-[clamp(26px,3.2vw,56px)] flex items-center">
+                <span className="nold font-display font-semibold tracking-[-.022em] text-[clamp(15px,1.42vw,19px)] leading-[1.34] text-[#77908A]" style={{ '--d': row.delay }}>
+                  {row.oldText}
                 </span>
               </div>
-              <div className="cb">
-                <span className="nnew" style={{ '--d': delay }}>
-                  <i>&rarr;</i> {newText}
+              <div className="cb border-t border-[var(--line-d)] py-[clamp(14px,1.6vw,19px)] pl-[clamp(26px,3.2vw,56px)] border-l border-[var(--line-d)] flex items-center">
+                <span className="nnew font-display font-semibold tracking-[-.022em] text-[clamp(15px,1.42vw,19px)] leading-[1.34] text-[var(--cream)]" style={{ '--d': row.delay }}>
+                  <i className="not-italic text-[var(--amber)] mr-2 inline-block">&rarr;</i>
+                  {row.newText}
                 </span>
               </div>
             </div>
           ))}
-
-          <div className="ca last border-t-transparent" />
-          <div className="cb last pt-[clamp(20px,2.4vw,30px)]">
-            <p className="out text-[clamp(16.5px,1.7vw,20px)] text-[#F6F7F1] font-display font-semibold tracking-[-.022em] max-w-[32ch] leading-[1.3]">
-              That is the difference between having a policy and having somebody on it.
-            </p>
-          </div>
         </div>
       </div>
     </section>

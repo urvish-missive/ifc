@@ -193,28 +193,28 @@ export default function RealitySection() {
             </div>
 
             {/* Readout */}
-            <div id="readout" aria-live="polite" className="readout mt-[26px] border border-[#C9D2C2] rounded-[10px] p-[clamp(26px,3vw,38px)] bg-[#F2F4EC] min-h-[200px]">
-              <div className="k font-mono text-[10.5px] tracking-[.16em] uppercase text-[#7A8C80]" id="roK">
+            <div aria-live="polite" className="mt-[26px] border border-[#C9D2C2] rounded-[10px] p-[clamp(26px,3vw,38px)] bg-[#F2F4EC] min-h-[200px]">
+              <div className="font-mono text-[10.5px] tracking-[.16em] uppercase text-[#7A8C80]">
                 {RUPEE_DATA[activeSeg].k}
               </div>
-              <h3 className="text-[clamp(18px,1.75vw,22px)] font-display font-bold tracking-[-.02em] leading-[1.18] text-[#0C3436] mt-3 mb-1.5" id="roT">
+              <h3 className="text-[clamp(18px,1.75vw,22px)] font-display font-bold tracking-[-.02em] leading-[1.18] text-[#0C3436] mt-3 mb-1.5">
                 {RUPEE_DATA[activeSeg].t}
               </h3>
-              <div className="amt font-mono text-[13px] text-[#43584E] mb-4" id="roA">
+              <div className="font-mono text-[13px] text-[#43584E] mb-4">
                 {RUPEE_DATA[activeSeg].a}
               </div>
-              <p className="text-[15.2px] text-[#43584E] leading-[1.62] max-w-none" id="roP">
+              <p className="text-[15.2px] text-[#43584E] leading-[1.62] max-w-none">
                 {RUPEE_DATA[activeSeg].p}
               </p>
-              <div className="fc mt-[18px] pt-4 border-t border-[#C9D2C2] text-[14.6px] text-[#0C3436]">
+              <div className="mt-[18px] pt-4 border-t border-[#C9D2C2] text-[14.6px] text-[#0C3436]">
                 <b className="font-mono text-[10.5px] tracking-[.14em] uppercase text-[#8A6113] block mb-[7px] font-medium">
                   Where 1FC Insure comes in
                 </b>
-                <span id="roF">{RUPEE_DATA[activeSeg].f}</span>
+                <span>{RUPEE_DATA[activeSeg].f}</span>
               </div>
             </div>
 
-            <p className="src mt-4 font-mono text-[10.5px] tracking-[.04em] text-[#8B9A8E] leading-[1.7]">
+            <p className="mt-4 font-mono text-[10.5px] tracking-[.04em] text-[#8B9A8E] leading-[1.7]">
               IRDAI Annual Report 2023-24. Percentages are of claim amount, not claim count, and total 100.01% due to rounding in the source.
             </p>
           </div>
