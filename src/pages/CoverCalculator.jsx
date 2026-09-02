@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Info, ArrowRight } from 'lucide-react'
+import { Info } from 'lucide-react'
 import PageHero from '../components/sections/PageHero'
 import Section from '../components/ui/Section'
 import Container from '../components/ui/Container'

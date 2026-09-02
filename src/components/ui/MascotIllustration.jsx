@@ -1,5 +1,3 @@
-import React from 'react'
-
 const MASCOT_IMAGES = {
   hero: '/art/mascot-hero.webp',
   desk: '/art/mascot-hero.webp',

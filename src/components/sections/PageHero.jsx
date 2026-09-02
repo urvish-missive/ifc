@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import Container from '../ui/Container'
-import { fadeUp, stagger, inView } from '../../lib/motion'
+import { fadeUp, stagger } from '../../lib/motion'
 
 // Interior-page hero on the pine ground, so the transparent header always has a
 // dark surface beneath it. A faint thread rail ties back to the signature.

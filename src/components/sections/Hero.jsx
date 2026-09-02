@@ -3,7 +3,7 @@ import Container from '../ui/Container'
 import Button from '../ui/Button'
 import Marquee from '../ui/Marquee'
 import CaseCard from '../signature/CaseCard'
-import { fadeUp, stagger, easeSoft } from '../../lib/motion'
+import { fadeUp, stagger } from '../../lib/motion'
 import { brand } from '../../data/site'
 import { assurances } from '../../data/journey'
 
