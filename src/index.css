@@ -295,7 +295,11 @@ details[open] > summary::after { content: "-"; }
 
 /* --- Panel (right side nodes) --- */
 .panel { display: flex; flex-direction: column; gap: 12px; }
-@media (max-width: 1080px) { .panel { display: none; } }
+@media (max-width: 1080px) {
+  .panel { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+  .panel .pnode { flex: 1 1 44%; min-width: 0; }
+  .pnode { flex: 1 1 auto; min-width: 150px; transform: translateY(10px); padding: 13px 15px; }
+}
 .pnode {
   border: 1px solid var(--line-d);
   border-radius: 10px;
@@ -303,7 +307,7 @@ details[open] > summary::after { content: "-"; }
   background: rgba(246, 247, 241, .03);
   opacity: 0;
   transform: translateX(14px);
-  transition: opacity .55s, transform .55s;
+  transition: opacity .55s var(--d, 0ms), transform .55s var(--d, 0ms);
 }
 .pnode.on { opacity: 1; transform: none; }
 .pnode .pk { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .15em; text-transform: uppercase; color: var(--sage-dim); }

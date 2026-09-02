@@ -27,6 +27,40 @@ const CASE_ROWS = [
   { from: 4, time: 'D3', title: 'The outcome, explained in plain language', sub: 'What was paid, what was not, and what to do next' },
 ]
 
+const PANEL_NODES = [
+  {
+    from: 1,
+    key: 'Your coordinator',
+    val: 'Named, on the case',
+    sub: 'Not a queue, not a rotation',
+    delay: '640ms',
+  },
+  {
+    from: 2,
+    key: 'Hospital',
+    val: 'Coordinated by us',
+    sub: 'Documents listed once, 7 of 7 collected',
+    hasDocbar: true,
+    delay: '200ms',
+  },
+  {
+    from: 3,
+    key: 'Insurer or TPA',
+    val: 'The decision sits here',
+    sub: 'We keep following it up from the outside',
+    warn: true,
+    delay: '200ms',
+  },
+  {
+    from: 4,
+    key: 'You',
+    val: 'Told what it means',
+    sub: 'And what the next step is, if there is',
+    good: true,
+    delay: '200ms',
+  },
+]
+
 export default function CaseDeskSection() {
   const [stage, setStage] = useState(0)
   const trackRef = useRef(null)
@@ -71,10 +105,10 @@ export default function CaseDeskSection() {
     >
       {/* Sticky Inner Frame */}
       <div className="desk-sticky sticky top-[70px] h-[calc(100vh-70px)] min-h-[620px] flex flex-col justify-center overflow-hidden max-lg:static max-lg:h-auto max-lg:min-h-0 max-lg:overflow-visible max-lg:pt-6 max-lg:pb-12 w-full max-w-[var(--maxw)] mx-auto px-[var(--pad)]">
-        
+
         {/* Header */}
         <div className="desk-head flex justify-between items-end gap-6 flex-wrap mb-[clamp(20px,2.6vw,34px)] pt-4 sm:pt-8 md:pt-12 max-lg:items-start max-lg:mb-[18px]">
-          <div>
+          <div className='pt-5 sm:pt-10 md:pt-20'>
             <span className="label font-mono text-[11px] tracking-[.19em] uppercase text-[#7A948D] inline-flex items-center gap-3">
               <span className="w-[26px] h-px bg-[#E0A139] flex-none" />
               When you need to claim
@@ -175,6 +209,32 @@ export default function CaseDeskSection() {
             >
               <MascotIllustration variant="desk" className="h-[220px] sm:h-[260px]" />
             </span>
+          </div>
+
+          {/* Right Panel */}
+          <div className="panel">
+            {PANEL_NODES.map(({ from, key, val, sub, hasDocbar, warn, good, delay }) => {
+              const isOn = stage >= from
+              return (
+                <div
+                  key={key}
+                  data-from={from}
+                  style={{ '--d': delay }}
+                  className={`pnode ${warn ? 'warn' : ''} ${good ? 'good' : ''} ${isOn ? 'on' : ''}`}
+                >
+                  <div className="pk">{key}</div>
+                  <div className="pv">
+                    {val}
+                    <small>{sub}</small>
+                  </div>
+                  {hasDocbar && (
+                    <div className="docbar">
+                      <i />
+                    </div>
+                  )}
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>
