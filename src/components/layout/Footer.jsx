@@ -8,9 +8,9 @@ export default function Footer() {
           <div className="max-w-xs">
             <a href="/#top" aria-label="1FC Insure home" className="inline-block transition-opacity hover:opacity-90">
               <img
-                src="/brand/1fc-logo-wordmark.png"
+                src="/brand/new1fcLogo.webp"
                 alt="1FC Insure"
-                className="h-[32px] max-md:h-[26px] w-auto block object-contain"
+                className="h-[38px] max-md:h-[30px] w-auto block object-contain"
               />
             </a>
             <p className="mt-5 text-[15px] leading-relaxed text-[#CBD8CE]">

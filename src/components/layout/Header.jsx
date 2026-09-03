@@ -30,9 +30,9 @@ export default function Header() {
           className="brand flex items-center transition-opacity hover:opacity-90"
         >
           <img
-            src="/brand/1fc-logo-wordmark.png"
+            src="/brand/new1fcLogo.webp"
             alt="1FC Insure"
-            className="h-[28px] max-md:h-[24px] w-auto block object-contain"
+            className="h-[34px] max-md:h-[28px] w-auto block object-contain"
           />
         </Link>
 
